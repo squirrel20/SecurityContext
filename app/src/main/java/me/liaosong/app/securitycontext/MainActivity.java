@@ -13,10 +13,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO 定义安全情景数据结构
+        // TODO 定义安全情景数据结构
+        // 分为定义情景，定义安全规则，此处应该有两张表
+        // 然后定义安全情景，就是链接情景和安全规则，此处应该有一张表
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
