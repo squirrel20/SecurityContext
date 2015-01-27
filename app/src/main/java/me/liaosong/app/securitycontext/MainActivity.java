@@ -13,6 +13,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TODO 定义安全情景数据结构
 
     }
 
