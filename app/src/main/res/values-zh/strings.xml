@@ -3,4 +3,7 @@
     <string name="app_name">安全情景</string>
     <string name="action_settings">设置</string>
     <string name="hello_world">你好，世界！</string>
+    <string name="title_activity_define_security">定义安全规则</string>
+    <string name="add">添加</string>
+    <string name="done">确定</string>
 </resources>
