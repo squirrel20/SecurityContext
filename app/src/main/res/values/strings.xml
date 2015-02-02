@@ -7,5 +7,6 @@
     <string name="title_activity_define_security">DefineSecurity</string>
     <string name="add">Add</string>
     <string name="done">Done</string>
+    <string name="none">none</string>
 
 </resources>

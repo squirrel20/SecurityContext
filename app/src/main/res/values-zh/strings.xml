@@ -6,4 +6,5 @@
     <string name="title_activity_define_security">定义安全规则</string>
     <string name="add">添加</string>
     <string name="done">确定</string>
+    <string name="none">none</string>
 </resources>
