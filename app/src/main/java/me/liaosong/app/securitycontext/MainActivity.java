@@ -1,5 +1,6 @@
 package me.liaosong.app.securitycontext;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(this, DefineSecurityActivity.class);
+        startActivity(intent);
         // TODO 定义安全情景数据结构
         // 分为定义情景，定义安全规则，此处应该有两张表
         // 然后定义安全情景，就是链接情景和安全规则，此处应该有一张表
