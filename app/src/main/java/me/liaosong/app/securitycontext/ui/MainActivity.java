@@ -3,6 +3,7 @@ package me.liaosong.app.securitycontext.ui;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import java.util.List;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.PWSQLiteOpenHelper;
 import me.liaosong.app.securitycontext.ui.SetPasswordActivity;
 
 public class MainActivity extends ActionBarActivity {
@@ -21,9 +23,13 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (isUnsetPassword()) {
+        PWSQLiteOpenHelper pwsqLiteOpenHelper = new PWSQLiteOpenHelper(this);
+        Cursor cursor = pwsqLiteOpenHelper.getPassword(pwsqLiteOpenHelper.getReadableDatabase());
+        if (cursor.getCount() != 1) {
             Intent intent = new Intent(this, SetPasswordActivity.class);
-            //startActivity(intent);
+            startActivity(intent);
+        } else {
+
         }
 
         //packageList();  // 测试当前安装的包
@@ -66,9 +72,5 @@ public class MainActivity extends ActionBarActivity {
             PackageInfo packageInfo = packageInfoList.get(i);
             Log.d("PACKAGE", packageInfo.applicationInfo.loadLabel(packageManager).toString());
         }
-    }
-
-    private boolean isUnsetPassword() {
-        return true;
     }
 }

@@ -1,5 +1,6 @@
 package me.liaosong.app.securitycontext.ui;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.PWSQLiteOpenHelper;
 
 
 public class SetPasswordActivity extends ActionBarActivity {
@@ -69,5 +71,11 @@ public class SetPasswordActivity extends ActionBarActivity {
             textView.setText(this.getText(R.string.password_protection_answer_wrong));
             return;
         }
+    }
+
+    private void savePassword(String password, String ppQuestion, String ppAnswer) {
+        PWSQLiteOpenHelper pwsqLiteOpenHelper = new PWSQLiteOpenHelper(this);
+        pwsqLiteOpenHelper.savePassword(pwsqLiteOpenHelper.getWritableDatabase(),
+                password, ppQuestion, ppAnswer);
     }
 }
