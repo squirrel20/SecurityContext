@@ -1,4 +1,4 @@
-package me.liaosong.app.securitycontext;
+package me.liaosong.app.securitycontext.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.liaosong.app.securitycontext.MyArrayAdapter;
+import me.liaosong.app.securitycontext.R;
 
 
 public class DefineSecurityActivity extends ActionBarActivity {

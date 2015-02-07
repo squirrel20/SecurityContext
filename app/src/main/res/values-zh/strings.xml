@@ -7,4 +7,11 @@
     <string name="add">添加</string>
     <string name="done">确定</string>
     <string name="none">none</string>
+    <string name="set_password">输入密码</string>
+    <string name="title_activity_set_password">设置密码</string>
+    <string name="password_protection_answer">密保答案</string>
+    <string name="password_protection_question">密保问题</string>
+    <string name="set_password_repeat">再次输入密码</string>
+    <string name="set_password_wrong">输入4个数字</string>
+    <string name="set_password_repeat_wrong">第一次输入的密码和第二次输入的密码不匹配</string>
 </resources>

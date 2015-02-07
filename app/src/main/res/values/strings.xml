@@ -8,5 +8,16 @@
     <string name="add">Add</string>
     <string name="done">Done</string>
     <string name="none">none</string>
+    <string name="title_activity_security_item">SecurityItemActivity</string>
+    <string name="title_activity_set_password">Set Password</string>
+    <string name="set_password">Set Password</string>
+    <string name="set_password_repeat">Set Password Repeat</string>
+    <string name="password_protection_question">Password Protection Question</string>
+    <string name="password_protection_answer">Password Protection Answer</string>
+
+    <string name="set_password_wrong">Input 4 number</string>
+    <string name="set_password_repeat_wrong">Mismatching input password and repeat input password</string>
+    <string name="password_protection_answer_wrong">Please input password protection answer</string>
+    <string name="password_protection_question_wrong">Please input password protection question</string>
 
 </resources>

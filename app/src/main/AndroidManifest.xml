@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,13 +17,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DefineSecurityActivity"
+            android:name=".ui.DefineSecurityActivity"
             android:label="@string/title_activity_define_security"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="me.liaosong.app.securitycontext.MainActivity" />
+                android:value=".ui.MainActivity" />
         </activity>
+        <activity
+            android:name=".ui.SecurityItemActivity"
+            android:label="@string/title_activity_security_item"
+            android:parentActivityName=".ui.DefineSecurityActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.DefineSecurityActivity" />
+        </activity>
+        <activity
+            android:name=".ui.SetPasswordActivity"
+            android:label="@string/title_activity_set_password"></activity>
     </application>
 
 </manifest>
