@@ -28,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
         if (cursor.getCount() != 1) {
             Intent intent = new Intent(this, SetPasswordActivity.class);
             startActivity(intent);
+            // TODO 怎么从SetPasswordActivity返回呢
         } else {
 
         }

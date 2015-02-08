@@ -3,6 +3,7 @@ package me.liaosong.app.securitycontext.ui;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,7 +54,7 @@ public class SetPasswordActivity extends ActionBarActivity {
         }
 
         EditText set_password_repeat = (EditText) findViewById(R.id.set_password_repeat);
-        if (set_password.getText() != set_password_repeat.getText()) {
+        if (!set_password.getText().toString().equals(set_password_repeat.getText().toString())) {
             textView.setText(this.getText(R.string.set_password_repeat_wrong));
             return;
         }
@@ -71,6 +72,10 @@ public class SetPasswordActivity extends ActionBarActivity {
             textView.setText(this.getText(R.string.password_protection_answer_wrong));
             return;
         }
+
+        savePassword(set_password.getText().toString(),
+                password_protection_question.getText().toString(),
+                password_protection_answer.getText().toString());
     }
 
     private void savePassword(String password, String ppQuestion, String ppAnswer) {
