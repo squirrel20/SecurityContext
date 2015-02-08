@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import java.util.List;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.Constants;
 import me.liaosong.app.securitycontext.library.PWSQLiteOpenHelper;
 import me.liaosong.app.securitycontext.ui.SetPasswordActivity;
 
@@ -25,13 +26,31 @@ public class MainActivity extends ActionBarActivity {
 
         PWSQLiteOpenHelper pwsqLiteOpenHelper = new PWSQLiteOpenHelper(this);
         Cursor cursor = pwsqLiteOpenHelper.getPassword(pwsqLiteOpenHelper.getReadableDatabase());
-        if (cursor.getCount() != 1) {
-            Intent intent = new Intent(this, SetPasswordActivity.class);
-            startActivity(intent);
-            // TODO 怎么从SetPasswordActivity返回呢
-        } else {
+//        if (cursor != null) {
+//            cursor.moveToFirst();
+//            int count = cursor.getCount();
+//            int columnCount = cursor.getColumnCount();
+//            int index = cursor.getColumnIndex(PWSQLiteOpenHelper.COLUMN_NAME_PASSWORD);
+//            String password = cursor.getString(index);
+//            int i = 0;
+//        }
 
+        Intent intent;
+        if (cursor == null || cursor.getCount() != 1) {
+            intent = new Intent(this, SetPasswordActivity.class);
+        } else {
+            // 难道默认不是在第一个？
+            // 为什么没有这行代码不能执行 cursor.getString
+            cursor.moveToFirst();
+            intent = new Intent(this, AccessActivity.class);
+            intent.putExtra(
+                    Constants.KEY_PASSWORD, cursor.getString(
+                            cursor.getColumnIndex(PWSQLiteOpenHelper.COLUMN_NAME_PASSWORD)));
         }
+
+        cursor.close();
+        startActivity(intent);
+        this.finish();
 
         //packageList();  // 测试当前安装的包
 

@@ -1,5 +1,6 @@
 package me.liaosong.app.securitycontext.ui;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -76,6 +77,9 @@ public class SetPasswordActivity extends ActionBarActivity {
         savePassword(set_password.getText().toString(),
                 password_protection_question.getText().toString(),
                 password_protection_answer.getText().toString());
+
+        Intent intent = new Intent(this, AccessActivity.class);
+        this.finish();
     }
 
     private void savePassword(String password, String ppQuestion, String ppAnswer) {

@@ -13,9 +13,9 @@ import android.util.Log;
  */
 public class PWSQLiteOpenHelper extends SQLiteOpenHelper {
 
+    public static final String COLUMN_NAME_PASSWORD = "password";
     private static final String TABLE_NAME = "password";
     private static final String COLUMN_NAME_ID = "_id";
-    private static final String COLUMN_NAME_PASSWORD = "password";
     private static final String COLUMN_NAME_PP_QUESTION = "pp_question"; // 密保问题
     private static final String COLUMN_NAME_PP_ANSWER = "pp_answer";    // 密保答案
 
