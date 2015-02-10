@@ -6,40 +6,43 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import me.liaosong.app.securitycontext.MyArrayAdapter;
 import me.liaosong.app.securitycontext.R;
 
+public class DefineContextActivity extends ActionBarActivity {
 
-public class DefineSecurityActivity extends ActionBarActivity {
-
-    private ListView listView;
-    private ArrayList<String> titleList;
-    private MyArrayAdapter adapter;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_define_security);
+        setContentView(R.layout.activity_define_context);
 
-        View footer = getLayoutInflater().inflate(R.layout.list_view_footer, null);
+        listView = (ListView) this.findViewById(R.id.define_context);
+        View header = this.getLayoutInflater().inflate(R.layout.list_view_header, null);
+        View footer = this.getLayoutInflater().inflate(R.layout.list_view_footer, null);
 
-        titleList = new ArrayList<String>();
-        titleList.add("0");
-        adapter = new MyArrayAdapter(this, titleList);
-        listView = (ListView) this.findViewById(R.id.listView);
+        ((EditText) header.findViewById(R.id.header_edit_text))
+                .setHint(R.string.input_context_name);
+
+        listView.addHeaderView(header);
         listView.addFooterView(footer);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, new ArrayList<String>());
+        listView.setAdapter(arrayAdapter);
+
+        footer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
-                        .show();
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "footer", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -47,7 +50,7 @@ public class DefineSecurityActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_security, menu);
+        getMenuInflater().inflate(R.menu.menu_define_context, menu);
         return true;
     }
 
@@ -64,11 +67,5 @@ public class DefineSecurityActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void doneClick(View view) {
-        titleList.add(String.valueOf(titleList.size()));
-        // 当数据发生变化的时候更新adapter
-        adapter.notifyDataSetChanged();
     }
 }

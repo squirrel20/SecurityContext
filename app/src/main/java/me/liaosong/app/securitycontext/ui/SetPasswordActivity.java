@@ -79,6 +79,7 @@ public class SetPasswordActivity extends ActionBarActivity {
                 password_protection_answer.getText().toString());
 
         Intent intent = new Intent(this, AccessActivity.class);
+        startActivity(intent);
         this.finish();
     }
 
