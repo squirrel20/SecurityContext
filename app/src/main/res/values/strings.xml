@@ -31,5 +31,10 @@
     <!-- DefineContextActivity -->
     <string name="input_context_name">Input context name</string>
     <string name="title_activity_define_context_item">DefineContextItemActivity</string>
+    <string name="context_item">Context Item</string>
+
+    <!--DefineContextItemActivity -->
+    <string name="time_context_item">Time</string>
+    <string name="location_context_item">Location</string>
 
 </resources>

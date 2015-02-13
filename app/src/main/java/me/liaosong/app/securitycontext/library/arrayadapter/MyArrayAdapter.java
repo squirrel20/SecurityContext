@@ -1,4 +1,4 @@
-package me.liaosong.app.securitycontext;
+package me.liaosong.app.securitycontext.library.arrayadapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import me.liaosong.app.securitycontext.R;
 
 /**
  * Created by squirrel on 2015/2/4.

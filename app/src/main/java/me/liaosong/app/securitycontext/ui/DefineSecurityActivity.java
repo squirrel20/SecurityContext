@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import me.liaosong.app.securitycontext.MyArrayAdapter;
+import me.liaosong.app.securitycontext.library.arrayadapter.MyArrayAdapter;
 import me.liaosong.app.securitycontext.R;
 
 
@@ -26,7 +26,7 @@ public class DefineSecurityActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_security);
 
-        View footer = getLayoutInflater().inflate(R.layout.list_view_footer, null);
+        View footer = getLayoutInflater().inflate(R.layout.list_footer, null);
 
         titleList = new ArrayList<String>();
         titleList.add("0");

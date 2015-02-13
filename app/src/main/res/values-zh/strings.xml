@@ -22,4 +22,6 @@
     <string name="title_activity_access">输入密码</string>
     <string name="title_activity_define_context">定义情景</string>
     <string name="title_activity_security_context">安全情景</string>
+    <string name="location_context_item">位置</string>
+    <string name="time_context_item">时间</string>
 </resources>
