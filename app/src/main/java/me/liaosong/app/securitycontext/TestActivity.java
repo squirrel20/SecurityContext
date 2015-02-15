@@ -1,4 +1,4 @@
-package me.liaosong.app.securitycontext.ui;
+package me.liaosong.app.securitycontext;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,26 +8,25 @@ import android.view.MenuItem;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
 
-import me.liaosong.app.securitycontext.R;
 
-public class DefineContextLocationActivity extends ActionBarActivity {
+public class TestActivity extends ActionBarActivity {
 
     MapView mapView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SDKInitializer.initialize(this.getApplicationContext());
-        setContentView(R.layout.activity_define_context_location);
+        SDKInitializer.initialize(getApplicationContext());
+        setContentView(R.layout.activity_test);
 
-        mapView = (MapView) this.findViewById(R.id.mapView);
+        mapView = (MapView) this.findViewById(R.id.bmapView);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_context_location, menu);
+        getMenuInflater().inflate(R.menu.menu_test, menu);
         return true;
     }
 

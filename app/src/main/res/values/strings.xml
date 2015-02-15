@@ -37,5 +37,6 @@
     <string name="time_context_item">Time</string>
     <string name="location_context_item">Location</string>
     <string name="title_activity_define_context_location">DefineContextLocationActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>
