@@ -10,7 +10,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,7 +20,7 @@
             android:name=".ui.DefineSecurityActivity"
             android:label="@string/title_activity_define_security"
             android:parentActivityName=".ui.MainActivity">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
@@ -28,7 +28,7 @@
             android:name=".ui.SecurityItemActivity"
             android:label="@string/title_activity_security_item"
             android:parentActivityName=".ui.DefineSecurityActivity">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.DefineSecurityActivity" />
         </activity>
@@ -44,10 +44,10 @@
             android:label="@string/title_activity_security_context" />
         <activity
             android:name=".ui.DefineContextActivity"
-            android:label="@string/title_activity_define_context"></activity>
+            android:label="@string/title_activity_define_context" />
         <activity
-            android:name=".ui.DefineContextItemActivity"
-            android:label="@string/title_activity_define_context_item"></activity>
+            android:name=".ui.DefineContextLocationActivity"
+            android:label="@string/title_activity_define_context_location"></activity>
     </application>
 
 </manifest>

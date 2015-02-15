@@ -1,7 +1,9 @@
 package me.liaosong.app.securitycontext.ui;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +20,9 @@ import me.liaosong.app.securitycontext.library.Constants;
 import me.liaosong.app.securitycontext.library.ContextItem;
 
 public class DefineContextActivity extends ActionBarActivity {
+
+    private final int REQUEST_CODE = 220;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +78,40 @@ public class DefineContextActivity extends ActionBarActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         menu.setHeaderTitle(R.string.context_item);
 
+        /*
+        时间
+        位置
+        环境温度
+        噪声
+        速度
+        光线
+         */
         menu.add(0, Constants.TIME_CONTEXT_ITEM, Menu.NONE, R.string.time_context_item);
         menu.add(0, Constants.LOCATION_CONTEXT_ITEM, Menu.NONE, R.string.location_context_item);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        Toast.makeText(this, String.valueOf(item.getItemId()), Toast.LENGTH_SHORT).show();
+        int id = item.getItemId();
+
+        switch (id) {
+            case Constants.TIME_CONTEXT_ITEM:
+                break;
+            case Constants.LOCATION_CONTEXT_ITEM:
+                Intent intent = new Intent(this, DefineContextLocationActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+                break;
+            default:
+                Log.d(DefineContextActivity.class.getName(), "Undefined context item");
+        }
 
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+
+        }
     }
 }
