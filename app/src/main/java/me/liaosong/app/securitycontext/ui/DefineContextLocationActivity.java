@@ -2,17 +2,30 @@ package me.liaosong.app.securitycontext.ui;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 
 import me.liaosong.app.securitycontext.R;
 
 public class DefineContextLocationActivity extends ActionBarActivity {
 
-    MapView mapView = null;
+    private MapView mapView = null;
+    private BaiduMap baiduMap = null;
+    private LocationClient locationClient = null;
+    private BDLocationListener bdLocationListener = null;
+    private MyLocationData myLocationData = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +34,12 @@ public class DefineContextLocationActivity extends ActionBarActivity {
         setContentView(R.layout.activity_define_context_location);
 
         mapView = (MapView) this.findViewById(R.id.mapView);
+        baiduMap = mapView.getMap();
+        baiduMap.setMyLocationEnabled(true);
+
+        locationClient = new LocationClient(this.getApplicationContext());
+        locationClient.registerLocationListener(new MyBDLocationListener());
+        locationClient.start();
     }
 
 
@@ -63,4 +82,28 @@ public class DefineContextLocationActivity extends ActionBarActivity {
         super.onPause();
         mapView.onPause();
     }
+
+    private class MyBDLocationListener implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            baiduMap = mapView.getMap();
+            baiduMap.setMyLocationEnabled(true);
+            MyLocationData locData = new MyLocationData.Builder()
+                    .accuracy(location.getRadius())
+                            // 此处设置开发者获取到的方向信息，顺时针0-360
+                    .direction(100).latitude(location.getLatitude())
+                    .longitude(location.getLongitude()).build();
+            baiduMap.setMyLocationData(locData);
+
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(latLng, 16);
+            baiduMap.animateMapStatus(u);
+
+            Log.d(DefineContextLocationActivity.class.getName(),
+                    String.format("latitude: %f longitude: %f radius: %f",
+                            location.getLatitude(), location.getLongitude(), location.getRadius()));
+        }
+    }
+
 }
