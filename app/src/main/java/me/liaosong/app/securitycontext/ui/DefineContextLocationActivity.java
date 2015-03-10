@@ -47,6 +47,8 @@ public class DefineContextLocationActivity extends ActionBarActivity {
         locationClient.setLocOption(locationClientOption);
         locationClient.start();
         locationClient.requestLocation();
+
+        // TODO 在地图上选取范围
     }
 
 
