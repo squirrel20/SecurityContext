@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatusUpdate;
@@ -37,9 +38,15 @@ public class DefineContextLocationActivity extends ActionBarActivity {
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
 
+        LocationClientOption locationClientOption = new LocationClientOption();
+        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        locationClientOption.setProdName(this.getApplication().getPackageName());
+
         locationClient = new LocationClient(this.getApplicationContext());
         locationClient.registerLocationListener(new MyBDLocationListener());
+        locationClient.setLocOption(locationClientOption);
         locationClient.start();
+        locationClient.requestLocation();
     }
 
 
