@@ -31,6 +31,9 @@ public class SecurityContextActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        View item = this.getLayoutInflater().inflate(R.layout.list_item_sc, null);
+        listView.addFooterView(item);
     }
 
 
