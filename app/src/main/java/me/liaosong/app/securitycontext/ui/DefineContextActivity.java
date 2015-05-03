@@ -86,7 +86,7 @@ public class DefineContextActivity extends ActionBarActivity {
         速度
         光线
          */
-        menu.add(0, Constants.TIME_CONTEXT_ITEM, Menu.NONE, R.string.time_context_item);
+        menu.add(0, Constants.TIME_CONTEXT_ITEM, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
         menu.add(0, Constants.LOCATION_CONTEXT_ITEM, Menu.NONE, R.string.location_context_item);
     }
 

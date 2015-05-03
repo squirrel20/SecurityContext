@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import me.liaosong.app.securitycontext.R;
@@ -32,8 +33,9 @@ public class SecurityContextActivity extends ActionBarActivity {
             }
         });
 
-        View item = this.getLayoutInflater().inflate(R.layout.list_item_sc, null);
-        listView.addFooterView(item);
+        String[] arr = new String[0];
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, arr);
+        listView.setAdapter(adapter);
     }
 
 
