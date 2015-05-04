@@ -101,6 +101,14 @@
                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.DefineContextTimeActivity"
+            android:label="@string/title_activity_define_context_time"
+            android:parentActivityName=".ui.DefineContextActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.liaosong.app.securitycontext.ui.DefineContextActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -20,8 +20,8 @@ import me.liaosong.app.securitycontext.library.Constants;
 import me.liaosong.app.securitycontext.library.ContextItem;
 
 public class DefineContextActivity extends ActionBarActivity {
-
-    private final int REQUEST_CODE = 220;
+    private final int REQUEST_TIME = 221;
+    private final int REQUEST_LOCATION = 222;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,13 +93,15 @@ public class DefineContextActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();
-
+        Intent intent;
         switch (id) {
             case Constants.TIME_CONTEXT_ITEM:
+                intent = new Intent(this, DefineContextTimeActivity.class);
+                this.startActivityForResult(intent, this.REQUEST_TIME);
                 break;
             case Constants.LOCATION_CONTEXT_ITEM:
-                Intent intent = new Intent(this, DefineContextLocationActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
+                intent = new Intent(this, DefineContextLocationActivity.class);
+                startActivityForResult(intent, this.REQUEST_LOCATION);
                 break;
             default:
                 Log.d(DefineContextActivity.class.getName(), "Undefined context item");
@@ -110,8 +112,9 @@ public class DefineContextActivity extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-
+        if (resultCode != RESULT_OK) return;
+        switch (requestCode) {
+            //case this.REQUEST_TIME:break;
         }
     }
 }
