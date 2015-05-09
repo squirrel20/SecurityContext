@@ -88,6 +88,10 @@ public class DefineContextActivity extends ActionBarActivity {
          */
         menu.add(0, Constants.TIME_CONTEXT_ITEM, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
         menu.add(0, Constants.LOCATION_CONTEXT_ITEM, Menu.NONE, R.string.location_context_item);
+        menu.add(0, 102, Menu.NONE, "移动速度");
+        menu.add(0, 103, Menu.NONE, "光照强度");
+        menu.add(0, 104, Menu.NONE, "环境噪声");
+        menu.add(0, 105, Menu.NONE, "手机与用户的距离");
     }
 
     /**
