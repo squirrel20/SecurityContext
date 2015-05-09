@@ -20,8 +20,8 @@ import me.liaosong.app.securitycontext.library.Constants;
 import me.liaosong.app.securitycontext.library.ContextItem;
 
 public class DefineContextActivity extends ActionBarActivity {
-    private final int REQUEST_TIME = 221;
-    private final int REQUEST_LOCATION = 222;
+    private final static int REQUEST_TIME = 221;
+    private final static int REQUEST_LOCATION = 222;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +90,11 @@ public class DefineContextActivity extends ActionBarActivity {
         menu.add(0, Constants.LOCATION_CONTEXT_ITEM, Menu.NONE, R.string.location_context_item);
     }
 
+    /**
+     * 上下文菜单选择事件处理
+     * @param item
+     * @return
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -97,11 +102,11 @@ public class DefineContextActivity extends ActionBarActivity {
         switch (id) {
             case Constants.TIME_CONTEXT_ITEM:
                 intent = new Intent(this, DefineContextTimeActivity.class);
-                this.startActivityForResult(intent, this.REQUEST_TIME);
+                this.startActivityForResult(intent, REQUEST_TIME);
                 break;
             case Constants.LOCATION_CONTEXT_ITEM:
                 intent = new Intent(this, DefineContextLocationActivity.class);
-                startActivityForResult(intent, this.REQUEST_LOCATION);
+                startActivityForResult(intent, REQUEST_LOCATION);
                 break;
             default:
                 Log.d(DefineContextActivity.class.getName(), "Undefined context item");
@@ -114,7 +119,10 @@ public class DefineContextActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) return;
         switch (requestCode) {
-            //case this.REQUEST_TIME:break;
+            case REQUEST_LOCATION: break;
+            case REQUEST_TIME: break;
+            default: Log.d(DefineContextActivity.class.getName(), "not exist this request code : " +
+                    String.valueOf(requestCode));
         }
     }
 }
