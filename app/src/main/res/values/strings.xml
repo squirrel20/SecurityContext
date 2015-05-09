@@ -38,10 +38,7 @@
     <string name="location_context_item">Location</string>
     <string name="title_activity_define_context_location">DefineContextLocationActivity</string>
     <string name="title_activity_test">TestActivity</string>
-<<<<<<< HEAD
     <string name="title_activity_define_context_time">DefineContextTimeActivity</string>
-=======
     <string name="title_activity_settgings_item">SettgingsItemActivity</string>
->>>>>>> dev
 
 </resources>

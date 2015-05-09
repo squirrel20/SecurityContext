@@ -54,18 +54,11 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name" >
-<<<<<<< HEAD
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-=======
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
->>>>>>> dev
         </activity>
         <activity
             android:name=".ui.DefineSecurityActivity"
@@ -110,7 +103,6 @@
             android:label="@string/title_activity_test" >
         </activity>
         <activity
-<<<<<<< HEAD
             android:name=".ui.DefineContextTimeActivity"
             android:label="@string/title_activity_define_context_time"
             android:parentActivityName=".ui.DefineContextActivity" >
@@ -121,10 +113,10 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-=======
+        </activity>
+        <activity
             android:name=".ui.SettgingsItemActivity"
             android:label="@string/title_activity_settgings_item" >
->>>>>>> dev
         </activity>
     </application>
 
