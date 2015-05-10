@@ -41,4 +41,8 @@
     <string name="title_activity_define_context_time">DefineContextTimeActivity</string>
     <string name="title_activity_settgings_item">SettgingsItemActivity</string>
 
+    <!-- DefineContextTimeActivity -->
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+
 </resources>

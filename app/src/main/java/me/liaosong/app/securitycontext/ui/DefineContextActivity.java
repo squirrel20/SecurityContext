@@ -124,7 +124,12 @@ public class DefineContextActivity extends ActionBarActivity {
         if (resultCode != RESULT_OK) return;
         switch (requestCode) {
             case REQUEST_LOCATION: break;
-            case REQUEST_TIME: break;
+            case REQUEST_TIME:
+                String startDate = data.getExtras().getString(DefineContextTimeActivity.startTimeKey);
+                String endDate = data.getExtras().getString(DefineContextTimeActivity.endTimeKey);
+                Toast.makeText(this, startDate + " " + endDate, Toast.LENGTH_LONG).show();
+                // TODO 添加到情景列表中
+                break;
             default: Log.d(DefineContextActivity.class.getName(), "not exist this request code : " +
                     String.valueOf(requestCode));
         }
