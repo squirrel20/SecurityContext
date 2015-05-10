@@ -129,7 +129,7 @@ public class DefineContextActivity extends ActionBarActivity {
                 this.startActivityForResult(intent, TIME_ID);
                 break;
             case LOCATION_ID:
-                intent = new Intent(this, DefineContextLocationActivity.class);
+                intent = new Intent(this, DefineContextLocation2Activity.class);
                 startActivityForResult(intent, LOCATION_ID);
                 break;
             case SPEED_ID: break;

@@ -44,5 +44,7 @@
     <!-- DefineContextTimeActivity -->
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
+    <string name="title_activity_define_context_location2">DefineContextLocation2Activity</string>
+    <string name="get_location">Get Location</string>
 
 </resources>
