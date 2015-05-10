@@ -6,7 +6,7 @@
     <string name="title_activity_define_security">定义安全规则</string>
     <string name="add">添加</string>
     <string name="done">确定</string>
-    <string name="none">none</string>
+    <string name="none">无</string>
     <string name="set_password">输入密码</string>
     <string name="title_activity_set_password">设置密码</string>
     <string name="password_protection_answer">密保答案</string>
@@ -26,4 +26,9 @@
     <string name="time_context_item">时间</string>
     <string name="title_activity_security_item">应用安全规则</string>
     <string name="title_activity_settgings_item">设置类安全规则</string>
+    <string name="title_activity_define_context_time">时间</string>
+    <string name="title_activity_define_context_location">位置</string>
+    <string name="start_time">开始时间</string>
+    <string name="end_time">结束时间</string>
+    <string name="context_item">情景选项</string>
 </resources>

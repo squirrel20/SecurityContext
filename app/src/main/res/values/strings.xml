@@ -26,7 +26,7 @@
     <string name="check_password_wrong">Input password wrong</string>
     <string name="title_activity_security_context">SecurityContextActivity</string>
     <string name="input_password">Input password</string>
-    <string name="title_activity_define_context">DefineContextActivity</string>
+    <string name="title_activity_define_context">Define Context</string>
 
     <!-- DefineContextActivity -->
     <string name="input_context_name">Input context name</string>
@@ -36,9 +36,9 @@
     <!-- DefineContextItemActivity -->
     <string name="time_context_item">Time</string>
     <string name="location_context_item">Location</string>
-    <string name="title_activity_define_context_location">DefineContextLocationActivity</string>
+    <string name="title_activity_define_context_location">Set Location</string>
     <string name="title_activity_test">TestActivity</string>
-    <string name="title_activity_define_context_time">DefineContextTimeActivity</string>
+    <string name="title_activity_define_context_time">Set Time</string>
     <string name="title_activity_settgings_item">SettgingsItemActivity</string>
 
     <!-- DefineContextTimeActivity -->

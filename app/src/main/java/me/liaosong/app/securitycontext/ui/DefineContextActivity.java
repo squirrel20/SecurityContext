@@ -26,7 +26,22 @@ public class DefineContextActivity extends ActionBarActivity {
      * 位置情景唯一标识符
      */
     public final static int LOCATION_ID = 101;
-
+     /**
+     * 移动速度情景唯一标识符
+     */
+    public final static int SPEED_ID = 102;
+     /**
+     * 光照强度情景唯一标识符
+     */
+    public final static int LIGHT_ID = 103;
+     /**
+     * 环境噪声情景唯一标识符
+     */
+    public final static int NOISE_ID = 104;
+     /**
+     * 用户与手机距离情景唯一标识符
+     */
+    public final static int DISTANCE_ID = 105;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +108,10 @@ public class DefineContextActivity extends ActionBarActivity {
          */
         menu.add(0, TIME_ID, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
         menu.add(0, LOCATION_ID, Menu.NONE, R.string.location_context_item);
-        menu.add(0, 102, Menu.NONE, "移动速度");
-        menu.add(0, 103, Menu.NONE, "光照强度");
-        menu.add(0, 104, Menu.NONE, "环境噪声");
-        menu.add(0, 105, Menu.NONE, "手机与用户的距离");
+        menu.add(0, SPEED_ID, Menu.NONE, "移动速度");
+        menu.add(0, LIGHT_ID, Menu.NONE, "光照强度");
+        menu.add(0, NOISE_ID, Menu.NONE, "环境噪声");
+        menu.add(0, DISTANCE_ID, Menu.NONE, "手机与用户的距离");
     }
 
     /**
@@ -117,6 +132,10 @@ public class DefineContextActivity extends ActionBarActivity {
                 intent = new Intent(this, DefineContextLocationActivity.class);
                 startActivityForResult(intent, LOCATION_ID);
                 break;
+            case SPEED_ID: break;
+            case LIGHT_ID: break;
+            case NOISE_ID: break;
+            case DISTANCE_ID: break;
             default:
                 Log.d(DefineContextActivity.class.getName(), "Undefined context item");
         }

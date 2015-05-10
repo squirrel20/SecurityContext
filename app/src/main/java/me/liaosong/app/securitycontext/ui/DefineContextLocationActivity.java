@@ -20,6 +20,10 @@ import com.baidu.mapapi.model.LatLng;
 
 import me.liaosong.app.securitycontext.R;
 
+/**
+ * 主要实现获取当前位置，后期加入设置指定位置
+ * 应该要返回一个地理坐标，围栏范围
+ */
 public class DefineContextLocationActivity extends ActionBarActivity {
 
     private MapView mapView = null;
