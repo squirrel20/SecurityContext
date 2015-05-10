@@ -16,12 +16,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import me.liaosong.app.securitycontext.R;
-import me.liaosong.app.securitycontext.library.Constants;
-import me.liaosong.app.securitycontext.library.ContextItem;
 
 public class DefineContextActivity extends ActionBarActivity {
-    private final static int REQUEST_TIME = 221;
-    private final static int REQUEST_LOCATION = 222;
+    /**
+     * 时间情景唯一标识符
+     */
+    public final static int TIME_ID = 100;
+    /**
+     * 位置情景唯一标识符
+     */
+    public final static int LOCATION_ID = 101;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +91,8 @@ public class DefineContextActivity extends ActionBarActivity {
         速度
         光线
          */
-        menu.add(0, Constants.TIME_CONTEXT_ITEM, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
-        menu.add(0, Constants.LOCATION_CONTEXT_ITEM, Menu.NONE, R.string.location_context_item);
+        menu.add(0, TIME_ID, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
+        menu.add(0, LOCATION_ID, Menu.NONE, R.string.location_context_item);
         menu.add(0, 102, Menu.NONE, "移动速度");
         menu.add(0, 103, Menu.NONE, "光照强度");
         menu.add(0, 104, Menu.NONE, "环境噪声");
@@ -104,13 +109,13 @@ public class DefineContextActivity extends ActionBarActivity {
         int id = item.getItemId();
         Intent intent;
         switch (id) {
-            case Constants.TIME_CONTEXT_ITEM:
+            case TIME_ID:
                 intent = new Intent(this, DefineContextTimeActivity.class);
-                this.startActivityForResult(intent, REQUEST_TIME);
+                this.startActivityForResult(intent, TIME_ID);
                 break;
-            case Constants.LOCATION_CONTEXT_ITEM:
+            case LOCATION_ID:
                 intent = new Intent(this, DefineContextLocationActivity.class);
-                startActivityForResult(intent, REQUEST_LOCATION);
+                startActivityForResult(intent, LOCATION_ID);
                 break;
             default:
                 Log.d(DefineContextActivity.class.getName(), "Undefined context item");
@@ -123,8 +128,10 @@ public class DefineContextActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) return;
         switch (requestCode) {
-            case REQUEST_LOCATION: break;
-            case REQUEST_TIME:
+            case LOCATION_ID:
+                // TODO 实现围栏功能 百度地图API
+                break;
+            case TIME_ID:
                 String startDate = data.getExtras().getString(DefineContextTimeActivity.startTimeKey);
                 String endDate = data.getExtras().getString(DefineContextTimeActivity.endTimeKey);
                 Toast.makeText(this, startDate + " " + endDate, Toast.LENGTH_LONG).show();

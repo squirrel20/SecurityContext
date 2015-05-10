@@ -22,7 +22,7 @@ public class DefineContextTimeActivity extends ActionBarActivity {
     public final static String startTimeKey = "startTime";
     public final static String endTimeKey = "endTime";
 
-    private DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
+    public final static DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
 
     private SlideDateTimePicker picker;
     private TextView startDateView;
