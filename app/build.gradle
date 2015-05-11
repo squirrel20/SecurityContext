@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile files('libs/android_api_1.1_forsdk.jar')
     // https://github.com/jjobes/SlideDateTimePicker
     compile project(':slideDateTimePicker')
+    compile files('libs/BaiduLBS_Android.jar')
 }

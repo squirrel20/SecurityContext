@@ -8,10 +8,4 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="me.liaosong.app.securitycontext.TestActivity">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/bmapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true" />
-
 </RelativeLayout>

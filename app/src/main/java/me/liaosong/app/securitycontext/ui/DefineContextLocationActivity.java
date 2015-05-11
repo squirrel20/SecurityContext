@@ -1,65 +1,53 @@
 package me.liaosong.app.securitycontext.ui;
 
+/**
+ * ÈçºÎÊ¹ÓÃ°Ù¶ÈµØÍ¼¶¨Î»SDK
+ * µÚÒ»²½£ºÔÚ¹¤³Ìapp/libsÄ¿Â¼ÏÂ·ÅÈëBaiduLBS_Android.jar,ÔÚsrc/main/Ä¿Â¼ÏÂĞÂ½¨jniLibsÄ¿Â¼£¬·ÅÈëliblocSDK5.so£¬×¢ÒâjarºÍsoµÄÇ°3Î»°æ±¾ºÅ±ØĞëÒ»ÖÂ£¬²¢ÇÒ±£Ö¤Ê¹ÓÃÒ»´ÎÏÂÔØµÄÎÄ¼ş¼ĞÖĞµÄÁ½¸öÎÄ¼ş£¬²»ÄÜ²»Í¬¹¦ÄÜ×é¼şµÄjar»òso½»²æÊ¹ÓÃ¡£
+ * µÚ¶ş²½£ºµ¼Èëjar°ü¡£²Ëµ¥À¸Ñ¡ÔñFile->Project Structor->Modules->Dependencies,µã»÷+ºÅ£¬Ñ¡ÔñFile dependency£¬Ñ¡Ôñjar°üµ¼Èë¡£
+ * Í¨¹ıÒÔÉÏÁ½²½²Ù×÷ºó£¬Äú¾Í¿ÉÒÔÕı³£Ê¹ÓÃ°Ù¶ÈµØÍ¼SDKÎªÄúÌá¹©µÄÈ«²¿¹¦ÄÜÁË¡£
+ */
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.model.LatLng;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.MyApplication;
 
-/**
- * ä¸»è¦å®ç°è·å–å½“å‰ä½ç½®ï¼ŒåæœŸåŠ å…¥è®¾ç½®æŒ‡å®šä½ç½®
- * åº”è¯¥è¦è¿”å›ä¸€ä¸ªåœ°ç†åæ ‡ï¼Œå›´æ èŒƒå›´
- */
 public class DefineContextLocationActivity extends ActionBarActivity {
 
-    private MapView mapView = null;
-    private BaiduMap baiduMap = null;
-    private LocationClient locationClient = null;
-    private BDLocationListener bdLocationListener = null;
-    private MyLocationData myLocationData = null;
+    /**
+     * ¶¨Î»SDKµÄºËĞÄÀà
+     */
+    private LocationClient locationClient;
+    private BDLocation location;
+    private TextView locationView;
+    private TextView locationStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SDKInitializer.initialize(this.getApplicationContext());
-        setContentView(R.layout.activity_define_context_location);
+        setContentView(R.layout.activity_define_context_location2);
 
-        mapView = (MapView) this.findViewById(R.id.mapView);
-        baiduMap = mapView.getMap();
-        baiduMap.setMyLocationEnabled(true);
+        locationView = (TextView)findViewById(R.id.location);
+        locationStatus = (TextView)findViewById(R.id.get_location_status);
 
-        LocationClientOption locationClientOption = new LocationClientOption();
-        locationClientOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        locationClientOption.setProdName(this.getApplication().getPackageName());
-
-        locationClient = new LocationClient(this.getApplicationContext());
-        locationClient.registerLocationListener(new MyBDLocationListener());
-        locationClient.setLocOption(locationClientOption);
-        locationClient.start();
-        locationClient.requestLocation();
-
-        // TODO åœ¨åœ°å›¾ä¸Šé€‰å–èŒƒå›´
+        locationClient = ((MyApplication)getApplication()).locationClient;
+        initLocation();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_context_location, menu);
+        getMenuInflater().inflate(R.menu.menu_define_context_location2, menu);
         return true;
     }
 
@@ -79,44 +67,37 @@ public class DefineContextLocationActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
+    protected void onStop() {
+        locationClient.stop();
+        super.onStop();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
+    public void onButtonClick(View v) {
+        if (locationClient == null) {
+            Log.d(this.getLocalClassName(), "locationClient == null");
+            return;
+        }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    private class MyBDLocationListener implements BDLocationListener {
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            baiduMap = mapView.getMap();
-            baiduMap.setMyLocationEnabled(true);
-            MyLocationData locData = new MyLocationData.Builder()
-                    .accuracy(location.getRadius())
-                            // æ­¤å¤„è®¾ç½®å¼€å‘è€…è·å–åˆ°çš„æ–¹å‘ä¿¡æ¯ï¼Œé¡ºæ—¶é’ˆ0-360
-                    .direction(100).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            baiduMap.setMyLocationData(locData);
-
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(latLng, 16);
-            baiduMap.animateMapStatus(u);
-
-            Log.d(DefineContextLocationActivity.class.getName(),
-                    String.format("latitude: %f longitude: %f radius: %f",
-                            location.getLatitude(), location.getLongitude(), location.getRadius()));
+        if (locationClient.isStarted()) {
+            locationClient.stop();
+            Log.d(this.getLocalClassName(), "stop");
+        }
+        else {
+            locationClient.start();
+            Log.d(this.getLocalClassName(), "start");
         }
     }
 
+    private void initLocation() {
+        // ÉèÖÃ¶¨Î»²ÎÊı
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);   // ¸ß¾«¶È¶¨Î»Ä£Ê½
+        option.setOpenGps(true);    // µ±ÓÃ»§´ò¿ªgpsÊ±£¬ÉèÖÃÊÇ·ñ´ò¿ªgps£¬Ä¬ÈÏ²»´ò¿ª
+        option.setIsNeedAddress(true);  // ·µ»ØµÄ¶¨Î»½á¹û°üº¬µØÖ·ĞÅÏ¢
+        option.setScanSpan(1000);   // ÇëÇó¼ä¸ôÊ±¼ä1000ms
+        option.setCoorType("bd0911");   // ·µ»ØµÄ¶¨Î»½á¹ûÊÇ°Ù¶È¾­Î³¶È£¬Ä¬ÈÏÖµgcj02
+        option.setProdName(this.getPackageName());  // ÉèÖÃ²úÆ·ÏßÃû³Æ
+
+        locationClient.setLocOption(option);
+    }
 }
