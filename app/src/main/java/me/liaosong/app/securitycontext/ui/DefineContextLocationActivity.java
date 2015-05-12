@@ -41,6 +41,7 @@ public class DefineContextLocationActivity extends ActionBarActivity {
         locationStatus = (TextView)findViewById(R.id.get_location_status);
 
         locationClient = ((MyApplication)getApplication()).locationClient;
+        ((MyApplication)getApplication()).locationResult = locationView;
         initLocation();
     }
 

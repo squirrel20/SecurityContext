@@ -2,6 +2,7 @@ package me.liaosong.app.securitycontext.library;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -13,6 +14,7 @@ import com.baidu.location.LocationClient;
  */
 public class MyApplication extends Application {
     public LocationClient locationClient;
+	public TextView locationResult;
 
     @Override
     public void onCreate() {
@@ -59,6 +61,9 @@ public class MyApplication extends Application {
 				sb.append(location.getOperators());
 			}
 			Log.d("location", sb.toString());
+
+			if (locationResult != null)
+				locationResult.setText(sb);
         }
     }
 }
