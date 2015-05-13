@@ -13,8 +13,9 @@ import com.baidu.location.LocationClient;
  * 主Application
  */
 public class MyApplication extends Application {
-    public LocationClient locationClient;
 	public TextView locationResult;
+	public LocationClient locationClient;
+	public BDLocation currentLocation;
 
     @Override
     public void onCreate() {
@@ -22,6 +23,7 @@ public class MyApplication extends Application {
 
         locationClient = new LocationClient(this.getApplicationContext());
         locationClient.registerLocationListener(new MyLocationListener());
+
     }
 
     /**
@@ -64,6 +66,8 @@ public class MyApplication extends Application {
 
 			if (locationResult != null)
 				locationResult.setText(sb);
+
+			currentLocation = location;
         }
     }
 }

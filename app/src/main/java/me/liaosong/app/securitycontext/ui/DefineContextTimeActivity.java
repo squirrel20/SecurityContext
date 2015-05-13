@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.MyContext;
+import me.liaosong.app.securitycontext.library.MyContextTime;
 
 public class DefineContextTimeActivity extends ActionBarActivity {
 
@@ -89,9 +91,15 @@ public class DefineContextTimeActivity extends ActionBarActivity {
     public void finish() {
         if (startDateView.length() > 0 && endDateView.length() > 0) {
             Intent data = new Intent();
-            data.putExtra(startTimeKey, startDateView.getText());
-            data.putExtra(endTimeKey, endDateView.getText());
-
+            MyContextTime contextTime = new MyContextTime(R.string.context_time,
+                    this.getString(R.string.context_time),
+                    startDateView.getText().toString(),
+                    endDateView.getText().toString(),
+                    false);
+            Bundle bundle = new Bundle();
+            // 使用serializable在activity之间传递object对象
+            bundle.putSerializable(MyContext.key, contextTime);
+            data.putExtras(bundle);
             setResult(RESULT_OK, data);
         } else {
             setResult(RESULT_CANCELED);

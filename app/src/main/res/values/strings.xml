@@ -47,4 +47,8 @@
     <string name="title_activity_define_context_location2">DefineContextLocation2Activity</string>
     <string name="get_location">Get Location</string>
 
+    <!-- MyContext -->
+    <string name="context_time">time</string>
+    <string name="context_location">location</string>
+
 </resources>

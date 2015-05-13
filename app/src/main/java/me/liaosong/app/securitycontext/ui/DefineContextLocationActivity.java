@@ -7,6 +7,7 @@ package me.liaosong.app.securitycontext.ui;
  * 通过以上两步操作后，您就可以正常使用百度地图SDK为您提供的全部功能了。
  */
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,8 @@ public class DefineContextLocationActivity extends ActionBarActivity {
 
         locationClient = ((MyApplication)getApplication()).locationClient;
         ((MyApplication)getApplication()).locationResult = locationView;
+        location = ((MyApplication)getApplication()).currentLocation;
+
         initLocation();
     }
 
@@ -71,6 +74,17 @@ public class DefineContextLocationActivity extends ActionBarActivity {
     protected void onStop() {
         locationClient.stop();
         super.onStop();
+    }
+
+    @Override
+    public void finish()
+    {
+        if (location == null)
+            setResult(RESULT_CANCELED);
+        else
+        {
+            Intent intent = new Intent();
+        }
     }
 
     public void onButtonClick(View v) {

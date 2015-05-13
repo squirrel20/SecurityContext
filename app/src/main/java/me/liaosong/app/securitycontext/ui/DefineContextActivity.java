@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.MyContext;
 
 public class DefineContextActivity extends ActionBarActivity {
     /**
@@ -146,18 +147,21 @@ public class DefineContextActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) return;
+
+        MyContext myContext = null;
         switch (requestCode) {
             case LOCATION_ID:
                 // TODO 实现围栏功能 百度地图API
-                break;
             case TIME_ID:
-                String startDate = data.getExtras().getString(DefineContextTimeActivity.startTimeKey);
-                String endDate = data.getExtras().getString(DefineContextTimeActivity.endTimeKey);
-                Toast.makeText(this, startDate + " " + endDate, Toast.LENGTH_LONG).show();
+                myContext = (MyContext)data.getSerializableExtra(MyContext.key);
                 // TODO 添加到情景列表中
                 break;
             default: Log.d(DefineContextActivity.class.getName(), "not exist this request code : " +
                     String.valueOf(requestCode));
+        }
+
+        if (myContext != null) {
+            Toast.makeText(this, myContext.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 }
