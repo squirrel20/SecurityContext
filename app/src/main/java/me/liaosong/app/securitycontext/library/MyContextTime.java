@@ -10,11 +10,11 @@ public class MyContextTime extends MyContext {
 
 
     /**
-     * Ä¬ÈÏÎªÒ»´ÎĞÔÊÂ¼ş£¬¼´Ö¸¶¨ÁË¿ªÊ¼µÄ¾ßÌåÊ±¼ä£¬½áÊøµÄ¾ßÌåÊ±¼ä¡£
-     * Èç¹ûÊÇÃ¿Ìì·¢ÉúµÄ£¬ÔòÃ»ÓĞÖ¸¶¨ÈÕÆÚ£¬Ö»Ö¸¶¨ÁËĞ¡Ê±¡¢·ÖÖÓµÈ¡£
-     * @param startTime ¿ªÊ¼Ê±¼ä
-     * @param endTime ½áÊøÊ±¼ä
-     * @param isEveryDay ÊÇ·ñÃ¿ÌìÖØ¸´
+     * é»˜è®¤ä¸ºä¸€æ¬¡æ€§äº‹ä»¶ï¼Œå³æŒ‡å®šäº†å¼€å§‹çš„å…·ä½“æ—¶é—´ï¼Œç»“æŸçš„å…·ä½“æ—¶é—´ã€‚
+     * å¦‚æœæ˜¯æ¯å¤©å‘ç”Ÿçš„ï¼Œåˆ™æ²¡æœ‰æŒ‡å®šæ—¥æœŸï¼ŒåªæŒ‡å®šäº†å°æ—¶ã€åˆ†é’Ÿç­‰ã€‚
+     * @param startTime å¼€å§‹æ—¶é—´
+     * @param endTime ç»“æŸæ—¶é—´
+     * @param isEveryDay æ˜¯å¦æ¯å¤©é‡å¤
      */
     public MyContextTime(int id, String contextName, String startTime, String endTime, boolean isEveryDay) {
         super(id, contextName);

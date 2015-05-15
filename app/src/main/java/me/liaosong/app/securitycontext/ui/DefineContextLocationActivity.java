@@ -1,10 +1,10 @@
 package me.liaosong.app.securitycontext.ui;
 
 /**
- * ÈçºÎÊ¹ÓÃ°Ù¶ÈµØÍ¼¶¨Î»SDK
- * µÚÒ»²½£ºÔÚ¹¤³Ìapp/libsÄ¿Â¼ÏÂ·ÅÈëBaiduLBS_Android.jar,ÔÚsrc/main/Ä¿Â¼ÏÂĞÂ½¨jniLibsÄ¿Â¼£¬·ÅÈëliblocSDK5.so£¬×¢ÒâjarºÍsoµÄÇ°3Î»°æ±¾ºÅ±ØĞëÒ»ÖÂ£¬²¢ÇÒ±£Ö¤Ê¹ÓÃÒ»´ÎÏÂÔØµÄÎÄ¼ş¼ĞÖĞµÄÁ½¸öÎÄ¼ş£¬²»ÄÜ²»Í¬¹¦ÄÜ×é¼şµÄjar»òso½»²æÊ¹ÓÃ¡£
- * µÚ¶ş²½£ºµ¼Èëjar°ü¡£²Ëµ¥À¸Ñ¡ÔñFile->Project Structor->Modules->Dependencies,µã»÷+ºÅ£¬Ñ¡ÔñFile dependency£¬Ñ¡Ôñjar°üµ¼Èë¡£
- * Í¨¹ıÒÔÉÏÁ½²½²Ù×÷ºó£¬Äú¾Í¿ÉÒÔÕı³£Ê¹ÓÃ°Ù¶ÈµØÍ¼SDKÎªÄúÌá¹©µÄÈ«²¿¹¦ÄÜÁË¡£
+ * å¦‚ä½•ä½¿ç”¨ç™¾åº¦åœ°å›¾å®šä½SDK
+ * ç¬¬ä¸€æ­¥ï¼šåœ¨å·¥ç¨‹app/libsç›®å½•ä¸‹æ”¾å…¥BaiduLBS_Android.jar,åœ¨src/main/ç›®å½•ä¸‹æ–°å»ºjniLibsç›®å½•ï¼Œæ”¾å…¥liblocSDK5.soï¼Œæ³¨æ„jarå’Œsoçš„å‰3ä½ç‰ˆæœ¬å·å¿…é¡»ä¸€è‡´ï¼Œå¹¶ä¸”ä¿è¯ä½¿ç”¨ä¸€æ¬¡ä¸‹è½½çš„æ–‡ä»¶å¤¹ä¸­çš„ä¸¤ä¸ªæ–‡ä»¶ï¼Œä¸èƒ½ä¸åŒåŠŸèƒ½ç»„ä»¶çš„jaræˆ–soäº¤å‰ä½¿ç”¨ã€‚
+ * ç¬¬äºŒæ­¥ï¼šå¯¼å…¥jaråŒ…ã€‚èœå•æ é€‰æ‹©File->Project Structor->Modules->Dependencies,ç‚¹å‡»+å·ï¼Œé€‰æ‹©File dependencyï¼Œé€‰æ‹©jaråŒ…å¯¼å…¥ã€‚
+ * é€šè¿‡ä»¥ä¸Šä¸¤æ­¥æ“ä½œåï¼Œæ‚¨å°±å¯ä»¥æ­£å¸¸ä½¿ç”¨ç™¾åº¦åœ°å›¾SDKä¸ºæ‚¨æä¾›çš„å…¨éƒ¨åŠŸèƒ½äº†ã€‚
  */
 
 import android.content.Intent;
@@ -26,7 +26,7 @@ import me.liaosong.app.securitycontext.library.MyApplication;
 public class DefineContextLocationActivity extends ActionBarActivity {
 
     /**
-     * ¶¨Î»SDKµÄºËĞÄÀà
+     * å®šä½SDKçš„æ ¸å¿ƒç±»
      */
     private LocationClient locationClient;
     private BDLocation location;
@@ -104,14 +104,14 @@ public class DefineContextLocationActivity extends ActionBarActivity {
     }
 
     private void initLocation() {
-        // ÉèÖÃ¶¨Î»²ÎÊı
+        // è®¾ç½®å®šä½å‚æ•°
         LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);   // ¸ß¾«¶È¶¨Î»Ä£Ê½
-        option.setOpenGps(true);    // µ±ÓÃ»§´ò¿ªgpsÊ±£¬ÉèÖÃÊÇ·ñ´ò¿ªgps£¬Ä¬ÈÏ²»´ò¿ª
-        option.setIsNeedAddress(true);  // ·µ»ØµÄ¶¨Î»½á¹û°üº¬µØÖ·ĞÅÏ¢
-        option.setScanSpan(1000);   // ÇëÇó¼ä¸ôÊ±¼ä1000ms
-        option.setCoorType("bd0911");   // ·µ»ØµÄ¶¨Î»½á¹ûÊÇ°Ù¶È¾­Î³¶È£¬Ä¬ÈÏÖµgcj02
-        option.setProdName(this.getPackageName());  // ÉèÖÃ²úÆ·ÏßÃû³Æ
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);   // é«˜ç²¾åº¦å®šä½æ¨¡å¼
+        option.setOpenGps(true);    // å½“ç”¨æˆ·æ‰“å¼€gpsæ—¶ï¼Œè®¾ç½®æ˜¯å¦æ‰“å¼€gpsï¼Œé»˜è®¤ä¸æ‰“å¼€
+        option.setIsNeedAddress(true);  // è¿”å›çš„å®šä½ç»“æœåŒ…å«åœ°å€ä¿¡æ¯
+        option.setScanSpan(1000);   // è¯·æ±‚é—´éš”æ—¶é—´1000ms
+        option.setCoorType("bd0911");   // è¿”å›çš„å®šä½ç»“æœæ˜¯ç™¾åº¦ç»çº¬åº¦ï¼Œé»˜è®¤å€¼gcj02
+        option.setProdName(this.getPackageName());  // è®¾ç½®äº§å“çº¿åç§°
 
         locationClient.setLocOption(option);
     }

@@ -97,7 +97,7 @@ public class DefineContextTimeActivity extends ActionBarActivity {
                     endDateView.getText().toString(),
                     false);
             Bundle bundle = new Bundle();
-            // 使用serializable在activity之间传递object对象
+            // 浣跨敤serializable鍦╝ctivity涔嬮棿浼犻�抩bject瀵硅薄
             bundle.putSerializable(MyContext.key, contextTime);
             data.putExtras(bundle);
             setResult(RESULT_OK, data);
