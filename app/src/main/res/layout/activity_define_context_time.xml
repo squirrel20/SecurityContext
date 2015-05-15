@@ -1,13 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context="me.liaosong.app.securitycontext.ui.DefineContextTimeActivity">
 
     <RelativeLayout
+        android:id="@+id/timeLayout1"
         android:padding="@dimen/activity_vertical_margin"
         android:onClick="onSetStartTimeClick"
         android:layout_width="fill_parent"
@@ -27,6 +27,7 @@
     <RelativeLayout
         android:onClick="onSetEndTimeClick"
         android:padding="@dimen/activity_vertical_margin"
+        android:layout_below="@id/timeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -41,5 +42,11 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
+    <Button
+        android:layout_alignParentBottom="true"
+        android:onClick="onButtonDoneClick"
+        android:text="@string/done"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
-</LinearLayout>
+</RelativeLayout>

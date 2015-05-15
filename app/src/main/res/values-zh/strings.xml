@@ -31,4 +31,10 @@
     <string name="start_time">开始时间</string>
     <string name="end_time">结束时间</string>
     <string name="context_item">情景选项</string>
+    <string name="context_location">位置</string>
+    <string name="context_time">时间</string>
+    <string name="get_location"></string>
+    <string name="title_activity_define_context_item">设置情景</string>
+    <string name="title_activity_define_context_location2">位置</string>
+    <string name="title_activity_test">测试</string>
 </resources>

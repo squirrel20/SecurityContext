@@ -150,6 +150,7 @@ public class DefineContextActivity extends ActionBarActivity {
 
         MyContext myContext = null;
         switch (requestCode) {
+            // TODO 移动速度，光照强度，环境噪声，手机与用户的距离
             case LOCATION_ID:
                 // TODO 实现围栏功能 百度地图API
             case TIME_ID:

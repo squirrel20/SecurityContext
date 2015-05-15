@@ -20,10 +20,6 @@ import me.liaosong.app.securitycontext.library.MyContext;
 import me.liaosong.app.securitycontext.library.MyContextTime;
 
 public class DefineContextTimeActivity extends ActionBarActivity {
-
-    public final static String startTimeKey = "startTime";
-    public final static String endTimeKey = "endTime";
-
     public final static DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
 
     private SlideDateTimePicker picker;
@@ -63,29 +59,29 @@ public class DefineContextTimeActivity extends ActionBarActivity {
         picker.setListener(listener);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_context_time, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.set_date_done) {
-            this.finish();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_define_context_time, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.set_date_done) {
+//            this.finish();
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void finish() {
@@ -115,5 +111,9 @@ public class DefineContextTimeActivity extends ActionBarActivity {
     public void onSetEndTimeClick(View v) {
         currentPick = pickEndDate;
         picker.show();
+    }
+
+    public void onButtonDoneClick(View v) {
+        this.finish();
     }
 }

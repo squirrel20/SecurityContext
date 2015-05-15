@@ -22,6 +22,8 @@ import com.baidu.location.LocationClientOption;
 
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.MyApplication;
+import me.liaosong.app.securitycontext.library.MyContext;
+import me.liaosong.app.securitycontext.library.MyContextLocation;
 
 public class DefineContextLocationActivity extends ActionBarActivity {
 
@@ -31,7 +33,7 @@ public class DefineContextLocationActivity extends ActionBarActivity {
     private LocationClient locationClient;
     private BDLocation location;
     private TextView locationView;
-    private TextView locationStatus;
+//    private TextView locationStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +41,37 @@ public class DefineContextLocationActivity extends ActionBarActivity {
         setContentView(R.layout.activity_define_context_location2);
 
         locationView = (TextView)findViewById(R.id.location);
-        locationStatus = (TextView)findViewById(R.id.get_location_status);
+//        locationStatus = (TextView)findViewById(R.id.get_location_status);
 
         locationClient = ((MyApplication)getApplication()).locationClient;
         ((MyApplication)getApplication()).locationResult = locationView;
         location = ((MyApplication)getApplication()).currentLocation;
 
         initLocation();
+        locationClient.start();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_context_location2, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_define_context_location2, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     protected void onStop() {
@@ -83,25 +86,32 @@ public class DefineContextLocationActivity extends ActionBarActivity {
             setResult(RESULT_CANCELED);
         else
         {
-            Intent intent = new Intent();
+            Intent data = new Intent();
+            Bundle bundle = new Bundle();
+            MyContextLocation myContextLocation = new MyContextLocation(R.string.context_location,
+                    this.getString(R.string.context_location), location);
+            bundle.putSerializable(MyContext.key, myContextLocation);
+            data.putExtras(bundle);
+            setResult(RESULT_OK, data);
         }
+        super.finish();
     }
 
-    public void onButtonClick(View v) {
-        if (locationClient == null) {
-            Log.d(this.getLocalClassName(), "locationClient == null");
-            return;
-        }
-
-        if (locationClient.isStarted()) {
-            locationClient.stop();
-            Log.d(this.getLocalClassName(), "stop");
-        }
-        else {
-            locationClient.start();
-            Log.d(this.getLocalClassName(), "start");
-        }
-    }
+//    public void onButtonClick(View v) {
+//        if (locationClient == null) {
+//            Log.d(this.getLocalClassName(), "locationClient == null");
+//            return;
+//        }
+//
+//        if (locationClient.isStarted()) {
+//            locationClient.stop();
+//            Log.d(this.getLocalClassName(), "stop");
+//        }
+//        else {
+//            locationClient.start();
+//            Log.d(this.getLocalClassName(), "start");
+//        }
+//    }
 
     private void initLocation() {
         // 设置定位参数
@@ -114,5 +124,9 @@ public class DefineContextLocationActivity extends ActionBarActivity {
         option.setProdName(this.getPackageName());  // 设置产品线名称
 
         locationClient.setLocOption(option);
+    }
+
+    public void onButtonDoneClick(View v) {
+        this.finish();
     }
 }
