@@ -37,4 +37,9 @@
     <string name="title_activity_define_context_item">设置情景</string>
     <string name="title_activity_define_context_location2">位置</string>
     <string name="title_activity_test">测试</string>
+    <string-array name="context_speed_arrays">
+        <item>慢</item>
+        <item>正常</item>
+        <item>快</item>
+    </string-array>
 </resources>

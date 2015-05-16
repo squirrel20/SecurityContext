@@ -50,5 +50,20 @@
     <!-- MyContext -->
     <string name="context_time">time</string>
     <string name="context_location">location</string>
+    <string name="context_speed">speed</string>
+    <string name="context_light">light</string>
+    <string name="context_noise">noise</string>
+    <string name="context_distance">distance</string>
+    <string name="title_activity_define_context_speed">DefineContextSpeedActivity</string>
+
+    <!-- DefineContextSpeed -->
+    <string-array name="context_speed_arrays">
+        <item>slow</item>
+        <item>normal</item>
+        <item>fast</item>
+    </string-array>
+    <string name="title_activity_define_context_light">DefineContextLightActivity</string>
+    <string name="title_activity_define_context_noise">DefineContextNoiseActivity</string>
+    <string name="title_activity_define_context_distance">DefineContextDistanceActivity</string>
 
 </resources>

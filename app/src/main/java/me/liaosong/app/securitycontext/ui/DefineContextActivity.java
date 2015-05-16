@@ -1,8 +1,8 @@
 package me.liaosong.app.securitycontext.ui;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -19,30 +19,6 @@ import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.MyContext;
 
 public class DefineContextActivity extends ActionBarActivity {
-    /**
-     * 时间情景唯一标识符
-     */
-    public final static int TIME_ID = 100;
-    /**
-     * 位置情景唯一标识符
-     */
-    public final static int LOCATION_ID = 101;
-     /**
-     * 移动速度情景唯一标识符
-     */
-    public final static int SPEED_ID = 102;
-     /**
-     * 光照强度情景唯一标识符
-     */
-    public final static int LIGHT_ID = 103;
-     /**
-     * 环境噪声情景唯一标识符
-     */
-    public final static int NOISE_ID = 104;
-     /**
-     * 用户与手机距离情景唯一标识符
-     */
-    public final static int DISTANCE_ID = 105;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,12 +83,12 @@ public class DefineContextActivity extends ActionBarActivity {
         速度
         光线
          */
-        menu.add(0, TIME_ID, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
-        menu.add(0, LOCATION_ID, Menu.NONE, R.string.location_context_item);
-        menu.add(0, SPEED_ID, Menu.NONE, "移动速度");
-        menu.add(0, LIGHT_ID, Menu.NONE, "光照强度");
-        menu.add(0, NOISE_ID, Menu.NONE, "环境噪声");
-        menu.add(0, DISTANCE_ID, Menu.NONE, "手机与用户的距离");
+        menu.add(0, R.string.context_time, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
+        menu.add(0, R.string.context_location, Menu.NONE, R.string.location_context_item);
+        menu.add(0, R.string.context_speed, Menu.NONE, "移动速度");
+        menu.add(0, R.string.context_light, Menu.NONE, "光照强度");
+        menu.add(0, R.string.context_noise, Menu.NONE, "环境噪声");
+        menu.add(0, R.string.context_distance, Menu.NONE, "手机与用户的距离");
     }
 
     /**
@@ -123,37 +99,61 @@ public class DefineContextActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Intent intent;
+        int requestCode = -1;
+        Class<?> cla = null;
+        boolean status = true;
         switch (id) {
-            case TIME_ID:
-                intent = new Intent(this, DefineContextTimeActivity.class);
-                this.startActivityForResult(intent, TIME_ID);
+            case R.string.context_time:
+                requestCode = R.string.context_time;
+                cla = DefineContextTimeActivity.class;
                 break;
-            case LOCATION_ID:
-                intent = new Intent(this, DefineContextLocationActivity.class);
-                startActivityForResult(intent, LOCATION_ID);
+            case R.string.context_location:
+                requestCode = R.string.context_location;
+                cla = DefineContextLocationActivity.class;
                 break;
-            case SPEED_ID: break;
-            case LIGHT_ID: break;
-            case NOISE_ID: break;
-            case DISTANCE_ID: break;
+            case R.string.context_speed:
+                requestCode = R.string.context_speed;
+                cla = DefineContextSpeedActivity.class;
+                break;
+            case R.string.context_light:
+                requestCode = R.string.context_light;
+                cla = DefineContextLightActivity.class;
+                break;
+            case R.string.context_noise:
+                requestCode = R.string.context_noise;
+                cla = DefineContextNoiseActivity.class;
+                break;
+            case R.string.context_distance:
+                requestCode = R.string.context_distance;
+                cla = DefineContextDistanceActivity.class;
+                break;
             default:
+                status = false;
                 Log.d(DefineContextActivity.class.getName(), "Undefined context item");
         }
 
+        if (status) {
+            Intent intent = new Intent(this, cla);
+            // 低版本的SDK中，requestCode只能为16bit长
+            startActivityForResult(intent, (short)requestCode);
+        }
         return true;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) return;
-
+        
         MyContext myContext = null;
         switch (requestCode) {
             // TODO 移动速度，光照强度，环境噪声，手机与用户的距离
-            case LOCATION_ID:
-                // TODO 实现围栏功能 百度地图API
-            case TIME_ID:
+            // TODO 实现围栏功能 百度地图API
+            case (short)R.string.context_location:
+            case (short)R.string.context_time:
+            case (short)R.string.context_light:
+            case (short)R.string.context_noise:
+            case (short)R.string.context_speed:
+            case (short)R.string.context_distance:
                 myContext = (MyContext)data.getSerializableExtra(MyContext.key);
                 // TODO 添加到情景列表中
                 break;
