@@ -7,8 +7,12 @@ import com.baidu.location.BDLocation;
  */
 public class MyContextLocation extends MyContext {
     BDLocation location;
-    public MyContextLocation(int id, String name, BDLocation location) {
-        super(id, name);
+    public MyContextLocation(int id, String contextName, BDLocation location) {
+        super(id, contextName);
         this.location = location;
+    }
+
+    public String getValue() {
+        return location.getAddrStr();
     }
 }

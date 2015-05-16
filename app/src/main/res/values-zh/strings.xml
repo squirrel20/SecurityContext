@@ -42,6 +42,20 @@
         <item>正常</item>
         <item>快</item>
     </string-array>
+    <string-array name="context_light_arrays">
+        <item>黑暗</item>
+        <item>昏暗</item>
+        <item>明亮</item>
+    </string-array>
+    <string-array name="context_noise_arrays">
+        <item>安静</item>
+        <item>正常</item>
+        <item>吵闹</item>
+    </string-array>
+    <string-array name="context_distance_arrays">
+        <item>近</item>
+        <item>远</item>
+    </string-array>
     <string name="context_distance">手机与用户的距离</string>
     <string name="context_light">光照强度</string>
     <string name="context_noise">噪声</string>

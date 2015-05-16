@@ -14,23 +14,23 @@ import me.liaosong.app.securitycontext.R;
 public class MyContext implements Serializable {
     public final static String key = "key";
 
-    private String name;
+    private String contextName;
     private int id;
 
-    public MyContext(int id, String name) {
+    public MyContext(int id, String contextName) {
         this.id = id;
-        this.name = name;
+        this.contextName = contextName;
     }
 
     /**
      * @return 情景名
      */
-    public String getName() {
-        return name;
+    public String getContextName() {
+        return contextName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContextName(String contextName) {
+        this.contextName = contextName;
     }
 
     /**

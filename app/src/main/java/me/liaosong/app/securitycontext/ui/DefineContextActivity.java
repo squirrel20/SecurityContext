@@ -162,7 +162,7 @@ public class DefineContextActivity extends ActionBarActivity {
         }
 
         if (myContext != null) {
-            Toast.makeText(this, myContext.getName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, myContext.getContextName(), Toast.LENGTH_SHORT).show();
         } else {
             Log.d(this.getLocalClassName(), "myContext is null");
         }

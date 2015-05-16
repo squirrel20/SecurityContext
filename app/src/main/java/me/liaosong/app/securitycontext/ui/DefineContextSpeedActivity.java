@@ -3,14 +3,12 @@ package me.liaosong.app.securitycontext.ui;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
 
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.MyContext;
-import me.liaosong.app.securitycontext.library.MyContextSpeed;
+import me.liaosong.app.securitycontext.library.MyContextSpinner;
 
 public class DefineContextSpeedActivity extends ActionBarActivity {
     private Spinner spinner;
@@ -26,8 +24,12 @@ public class DefineContextSpeedActivity extends ActionBarActivity {
     @Override
     public void finish() {
         long selectedItemId = spinner.getSelectedItemId();
-        MyContextSpeed myContextSpeed = new MyContextSpeed(R.string.context_speed,
-                getString(R.string.context_speed), selectedItemId);
+        MyContextSpinner myContextSpeed = new MyContextSpinner(
+                R.string.context_speed,
+                getString(R.string.context_speed),
+                R.array.context_speed_arrays,
+                spinner.getSelectedItemId()
+        );
         Bundle bundle = new Bundle();
         bundle.putSerializable(MyContext.key, myContextSpeed);
 

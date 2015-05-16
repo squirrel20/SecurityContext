@@ -17,6 +17,8 @@ public class MyApplication extends Application {
 	public LocationClient locationClient;
 	public BDLocation currentLocation;
 
+	public static Application application;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -24,6 +26,7 @@ public class MyApplication extends Application {
         locationClient = new LocationClient(this.getApplicationContext());
         locationClient.registerLocationListener(new MyLocationListener());
 
+		application = this;
     }
 
     /**

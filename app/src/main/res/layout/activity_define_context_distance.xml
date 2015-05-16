@@ -6,7 +6,17 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="me.liaosong.app.securitycontext.ui.DefineContextDistanceActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner_distance"
+        android:entries="@array/context_distance_arrays"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:onClick="onButtonDoneClick"
+        android:text="@string/done"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

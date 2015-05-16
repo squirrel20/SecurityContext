@@ -54,16 +54,36 @@
     <string name="context_light">light</string>
     <string name="context_noise">noise</string>
     <string name="context_distance">distance</string>
-    <string name="title_activity_define_context_speed">Set Speed</string>
 
     <!-- DefineContextSpeed -->
+    <string name="title_activity_define_context_speed">Set Speed</string>
     <string-array name="context_speed_arrays">
         <item>slow</item>
         <item>normal</item>
         <item>fast</item>
     </string-array>
+
+    <!-- DefineContextLight -->
     <string name="title_activity_define_context_light">Set Light</string>
+    <string-array name="context_light_arrays">
+        <item>dark</item>
+        <item>dusk</item>
+        <item>bright</item>
+    </string-array>
+
+    <!-- DefineContextNoise -->
     <string name="title_activity_define_context_noise">Set Noise</string>
+    <string-array name="context_noise_arrays">
+        <item>quiet</item>
+        <item>normal</item>
+        <item>din</item>
+    </string-array>
+
+    <!-- DefineContextDistance -->
     <string name="title_activity_define_context_distance">Set Distance</string>
+    <string-array name="context_distance_arrays">
+        <item>close</item>
+        <item>far</item>
+    </string-array>
 
 </resources>

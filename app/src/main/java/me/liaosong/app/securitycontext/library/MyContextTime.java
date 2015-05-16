@@ -22,4 +22,8 @@ public class MyContextTime extends MyContext {
         this.endTime = endTime;
         this.isEveryDay = isEveryDay;
     }
+
+    public String getValue() {
+        return startTime + " - " + endTime;
+    }
 }
