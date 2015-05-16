@@ -26,20 +26,28 @@
     <string name="time_context_item">时间</string>
     <string name="title_activity_security_item">应用安全规则</string>
     <string name="title_activity_settgings_item">设置类安全规则</string>
-    <string name="title_activity_define_context_time">时间</string>
-    <string name="title_activity_define_context_location">位置</string>
+    <string name="title_activity_define_context_time">设置时间</string>
+    <string name="title_activity_define_context_location">设置位置</string>
     <string name="start_time">开始时间</string>
     <string name="end_time">结束时间</string>
     <string name="context_item">情景选项</string>
     <string name="context_location">位置</string>
     <string name="context_time">时间</string>
-    <string name="get_location"></string>
+    <string name="get_location">获取位置</string>
     <string name="title_activity_define_context_item">设置情景</string>
-    <string name="title_activity_define_context_location2">位置</string>
+    <string name="title_activity_define_context_location2">设置位置</string>
     <string name="title_activity_test">测试</string>
     <string-array name="context_speed_arrays">
         <item>慢</item>
         <item>正常</item>
         <item>快</item>
     </string-array>
+    <string name="context_distance">手机与用户的距离</string>
+    <string name="context_light">光照强度</string>
+    <string name="context_noise">噪声</string>
+    <string name="context_speed">速度</string>
+    <string name="title_activity_define_context_noise">设置噪声</string>
+    <string name="title_activity_define_context_speed">设置速度</string>
+    <string name="title_activity_define_context_light">设置光照强度</string>
+    <string name="title_activity_define_context_distance">设置手机与用户的距离</string>
 </resources>

@@ -30,7 +30,7 @@
 
     <!-- DefineContextActivity -->
     <string name="input_context_name">Input context name</string>
-    <string name="title_activity_define_context_item">DefineContextItemActivity</string>
+    <string name="title_activity_define_context_item">Set Context Item</string>
     <string name="context_item">Context Item</string>
 
     <!-- DefineContextItemActivity -->
@@ -44,7 +44,7 @@
     <!-- DefineContextTimeActivity -->
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
-    <string name="title_activity_define_context_location2">DefineContextLocation2Activity</string>
+    <string name="title_activity_define_context_location2">Set Location</string>
     <string name="get_location">Get Location</string>
 
     <!-- MyContext -->
@@ -54,7 +54,7 @@
     <string name="context_light">light</string>
     <string name="context_noise">noise</string>
     <string name="context_distance">distance</string>
-    <string name="title_activity_define_context_speed">DefineContextSpeedActivity</string>
+    <string name="title_activity_define_context_speed">Set Speed</string>
 
     <!-- DefineContextSpeed -->
     <string-array name="context_speed_arrays">
@@ -62,8 +62,8 @@
         <item>normal</item>
         <item>fast</item>
     </string-array>
-    <string name="title_activity_define_context_light">DefineContextLightActivity</string>
-    <string name="title_activity_define_context_noise">DefineContextNoiseActivity</string>
-    <string name="title_activity_define_context_distance">DefineContextDistanceActivity</string>
+    <string name="title_activity_define_context_light">Set Light</string>
+    <string name="title_activity_define_context_noise">Set Noise</string>
+    <string name="title_activity_define_context_distance">Set Distance</string>
 
 </resources>
