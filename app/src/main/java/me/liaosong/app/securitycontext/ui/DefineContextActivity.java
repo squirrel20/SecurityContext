@@ -83,12 +83,12 @@ public class DefineContextActivity extends ActionBarActivity {
         速度
         光线
          */
-        menu.add(0, R.string.context_time, Menu.NONE, R.string.time_context_item);    // TODO 实现时间选项
-        menu.add(0, R.string.context_location, Menu.NONE, R.string.location_context_item);
-        menu.add(0, R.string.context_speed, Menu.NONE, "移动速度");
-        menu.add(0, R.string.context_light, Menu.NONE, "光照强度");
-        menu.add(0, R.string.context_noise, Menu.NONE, "环境噪声");
-        menu.add(0, R.string.context_distance, Menu.NONE, "手机与用户的距离");
+        menu.add(0, R.string.context_time, Menu.NONE, R.string.context_time);
+        menu.add(0, R.string.context_location, Menu.NONE, R.string.context_location);
+        menu.add(0, R.string.context_speed, Menu.NONE, R.string.context_speed);
+        menu.add(0, R.string.context_light, Menu.NONE, R.string.context_light);
+        menu.add(0, R.string.context_noise, Menu.NONE, R.string.context_noise);
+        menu.add(0, R.string.context_distance, Menu.NONE, R.string.context_distance);
     }
 
     /**
