@@ -24,6 +24,6 @@ public class MyContextTime extends MyContext {
     }
 
     public String getValue() {
-        return startTime + " - " + endTime;
+        return startTime + "\n" + endTime;
     }
 }

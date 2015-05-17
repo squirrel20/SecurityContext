@@ -82,8 +82,10 @@ public class DefineContextLocationActivity extends ActionBarActivity {
     @Override
     public void finish()
     {
-        if (location == null)
+        if (location == null) {
             setResult(RESULT_CANCELED);
+            Log.d(this.getLocalClassName(), "location is null");
+        }
         else
         {
             Intent data = new Intent();

@@ -164,7 +164,6 @@ public class DefineContextActivity extends ActionBarActivity {
             case (short)R.string.context_speed:
             case (short)R.string.context_distance:
                 myContext = (MyContext)data.getSerializableExtra(MyContext.key);
-                // TODO 添加到情景列表中
                 myContextList.add(myContext);
                 // Adapter数据有更新
                 arrayAdapter.notifyDataSetChanged();
