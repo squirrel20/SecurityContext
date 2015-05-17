@@ -1,29 +1,40 @@
 package me.liaosong.app.securitycontext.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.MyContext;
 
 public class DefineContextActivity extends ActionBarActivity {
+    private ArrayList<MyContext> myContextList;
+    private MyContextAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_context);
+
+        myContextList = new ArrayList<>();
 
         ListView listView = (ListView) this.findViewById(R.id.define_context);
         View header = this.getLayoutInflater().inflate(R.layout.list_header, null);
@@ -42,8 +53,7 @@ public class DefineContextActivity extends ActionBarActivity {
         listView.addHeaderView(header);
         listView.addFooterView(footer);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, new ArrayList<String>());
+        arrayAdapter = new MyContextAdapter(this);
         listView.setAdapter(arrayAdapter);
 
         this.registerForContextMenu(listView);
@@ -146,7 +156,6 @@ public class DefineContextActivity extends ActionBarActivity {
         
         MyContext myContext = null;
         switch (requestCode) {
-            // TODO 移动速度，光照强度，环境噪声，手机与用户的距离
             // TODO 实现围栏功能 百度地图API
             case (short)R.string.context_location:
             case (short)R.string.context_time:
@@ -156,8 +165,12 @@ public class DefineContextActivity extends ActionBarActivity {
             case (short)R.string.context_distance:
                 myContext = (MyContext)data.getSerializableExtra(MyContext.key);
                 // TODO 添加到情景列表中
+                myContextList.add(myContext);
+                // Adapter数据有更新
+                arrayAdapter.notifyDataSetChanged();
                 break;
-            default: Log.d(DefineContextActivity.class.getName(), "not exist this request code : " +
+            default: Log.d(DefineContextActivity.class.getName(),
+                    "not exist this request code : " +
                     String.valueOf(requestCode));
         }
 
@@ -165,6 +178,43 @@ public class DefineContextActivity extends ActionBarActivity {
             Toast.makeText(this, myContext.getContextName(), Toast.LENGTH_SHORT).show();
         } else {
             Log.d(this.getLocalClassName(), "myContext is null");
+        }
+    }
+
+    // TODO 静态类是什么意思
+    public static class ContextViewHolder {
+        public TextView contextViewName;
+        public TextView contextViewValue;
+    }
+
+    public class MyContextAdapter extends ArrayAdapter<MyContext> {
+        private Activity activity;
+        public MyContextAdapter(Activity activity) {
+            super(activity, R.layout.list_item_context, myContextList);
+            this.activity = activity;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View rowView = convertView;
+
+            if (rowView == null) {
+                LayoutInflater inflater = activity.getLayoutInflater();
+                rowView = inflater.inflate(R.layout.list_item_context, null);
+
+                ContextViewHolder holder = new ContextViewHolder();
+                holder.contextViewName = (TextView)rowView.findViewById(R.id.context_name);
+                holder.contextViewValue = (TextView)rowView.findViewById(R.id.context_value);
+
+                rowView.setTag(holder);
+            }
+
+            ContextViewHolder viewHolder = (ContextViewHolder)rowView.getTag();
+            MyContext myContext = myContextList.get(position);
+            viewHolder.contextViewName.setText(myContext.getContextName());
+            viewHolder.contextViewValue.setText(myContext.getValue());
+
+            return rowView;
         }
     }
 }

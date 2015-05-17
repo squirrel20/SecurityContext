@@ -11,11 +11,13 @@ import me.liaosong.app.securitycontext.R;
  * 位置
  * Created by squirrel on 2015/2/10.
  */
-public class MyContext implements Serializable {
+public abstract class MyContext implements Serializable {
     public final static String key = "key";
 
     private String contextName;
     private int id;
+
+    public abstract String getValue();
 
     public MyContext(int id, String contextName) {
         this.id = id;
