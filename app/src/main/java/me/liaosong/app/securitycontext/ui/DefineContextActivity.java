@@ -180,6 +180,16 @@ public class DefineContextActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        // TODO 应该返回 ArrayList<MyContext>的一个拷贝，或者读取具体的数据？
+        super.finish();
+    }
+
+    public void onButtonDoneClick(View v) {
+        this.finish();
+    }
+
     // TODO 静态类是什么意思
     public static class ContextViewHolder {
         public TextView contextViewName;
