@@ -14,6 +14,11 @@ public class MyContextSpinner extends MyContext {
         this.selectedItemId = (int)selectedItemId;
     }
 
+    public MyContextSpinner(int id, String contextName, int arrayId, long selectedItemId, float weight) {
+        super(id, contextName, weight);
+        this.arrayId = arrayId;
+        this.selectedItemId = (int)selectedItemId;
+    }
     public String getValue() {
         return  MyApplication.application.getResources().getStringArray(arrayId)[selectedItemId];
     }

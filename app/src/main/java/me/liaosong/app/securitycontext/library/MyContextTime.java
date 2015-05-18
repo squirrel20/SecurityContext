@@ -23,6 +23,12 @@ public class MyContextTime extends MyContext {
         this.isEveryDay = isEveryDay;
     }
 
+    public MyContextTime(int id, String contextName, String startTime, String endTime, boolean isEveryDay, float weight) {
+        super(id, contextName, weight);
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isEveryDay = isEveryDay;
+    }
     public String getValue() {
         return startTime + "\n" + endTime;
     }

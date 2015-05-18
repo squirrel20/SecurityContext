@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -33,12 +34,15 @@ public class DefineContextLocationActivity extends ActionBarActivity {
     private LocationClient locationClient;
     private BDLocation location;
     private TextView locationView;
+    private float weight;
 //    private TextView locationStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_context_location2);
+
+        weight = 0;
 
         locationView = (TextView)findViewById(R.id.location);
 //        locationStatus = (TextView)findViewById(R.id.get_location_status);
@@ -91,7 +95,7 @@ public class DefineContextLocationActivity extends ActionBarActivity {
             Intent data = new Intent();
             Bundle bundle = new Bundle();
             MyContextLocation myContextLocation = new MyContextLocation(R.string.context_location,
-                    this.getString(R.string.context_location), location);
+                    this.getString(R.string.context_location), location, weight);
             bundle.putSerializable(MyContext.key, myContextLocation);
             data.putExtras(bundle);
             setResult(RESULT_OK, data);
@@ -129,6 +133,8 @@ public class DefineContextLocationActivity extends ActionBarActivity {
     }
 
     public void onButtonDoneClick(View v) {
+        EditText text = (EditText)findViewById(R.id.editText_time);
+        weight = Float.valueOf(text.getText().toString());
         this.finish();
     }
 }

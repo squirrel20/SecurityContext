@@ -153,6 +153,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.liaosong.app.securitycontext.ui.DefineContextActivity" />
         </activity>
+        <activity
+            android:name=".ui.DefineContextSpinnerActivity"
+            android:label="@string/title_activity_define_context_spinner" >
+        </activity>
     </application>
 
 </manifest>

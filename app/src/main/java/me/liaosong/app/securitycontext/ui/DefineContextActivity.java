@@ -123,19 +123,23 @@ public class DefineContextActivity extends ActionBarActivity {
                 break;
             case R.string.context_speed:
                 requestCode = R.string.context_speed;
-                cla = DefineContextSpeedActivity.class;
+                //cla = DefineContextSpeedActivity.class;
+                cla = DefineContextSpinnerActivity.class;
                 break;
             case R.string.context_light:
                 requestCode = R.string.context_light;
-                cla = DefineContextLightActivity.class;
+                //cla = DefineContextLightActivity.class;
+                cla = DefineContextSpinnerActivity.class;
                 break;
             case R.string.context_noise:
                 requestCode = R.string.context_noise;
-                cla = DefineContextNoiseActivity.class;
+                //cla = DefineContextNoiseActivity.class;
+                cla = DefineContextSpinnerActivity.class;
                 break;
             case R.string.context_distance:
                 requestCode = R.string.context_distance;
-                cla = DefineContextDistanceActivity.class;
+                //cla = DefineContextDistanceActivity.class;
+                cla = DefineContextSpinnerActivity.class;
                 break;
             default:
                 status = false;
@@ -144,8 +148,9 @@ public class DefineContextActivity extends ActionBarActivity {
 
         if (status) {
             Intent intent = new Intent(this, cla);
+            intent.putExtra(MyContext.key, requestCode);
             // 低版本的SDK中，requestCode只能为16bit长
-            startActivityForResult(intent, (short)requestCode);
+            startActivityForResult(intent, (short) requestCode);
         }
         return true;
     }
@@ -194,6 +199,7 @@ public class DefineContextActivity extends ActionBarActivity {
     public static class ContextViewHolder {
         public TextView contextViewName;
         public TextView contextViewValue;
+        public TextView contextViewWeight;
     }
 
     public class MyContextAdapter extends ArrayAdapter<MyContext> {
@@ -214,6 +220,7 @@ public class DefineContextActivity extends ActionBarActivity {
                 ContextViewHolder holder = new ContextViewHolder();
                 holder.contextViewName = (TextView)rowView.findViewById(R.id.context_name);
                 holder.contextViewValue = (TextView)rowView.findViewById(R.id.context_value);
+                holder.contextViewWeight = (TextView)rowView.findViewById(R.id.context_weight);
 
                 rowView.setTag(holder);
             }
@@ -222,6 +229,7 @@ public class DefineContextActivity extends ActionBarActivity {
             MyContext myContext = myContextList.get(position);
             viewHolder.contextViewName.setText(myContext.getContextName());
             viewHolder.contextViewValue.setText(myContext.getValue());
+            viewHolder.contextViewWeight.setText(String.valueOf(myContext.getWeight()));
 
             return rowView;
         }

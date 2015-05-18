@@ -23,7 +23,6 @@ public class DefineContextSpeedActivity extends ActionBarActivity {
 
     @Override
     public void finish() {
-        long selectedItemId = spinner.getSelectedItemId();
         MyContextSpinner myContextSpeed = new MyContextSpinner(
                 R.string.context_speed,
                 getString(R.string.context_speed),

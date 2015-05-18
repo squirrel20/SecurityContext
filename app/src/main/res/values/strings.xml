@@ -86,4 +86,7 @@
         <item>far</item>
     </string-array>
 
+    <!-- list_item_context -->
+    <string name="weight">weight</string>
+    <string name="title_activity_define_context_spinner">DefineContextSpinnerActivity</string>
 </resources>

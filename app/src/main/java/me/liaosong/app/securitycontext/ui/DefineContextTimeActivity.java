@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
@@ -25,6 +26,7 @@ public class DefineContextTimeActivity extends ActionBarActivity {
     private SlideDateTimePicker picker;
     private TextView startDateView;
     private TextView endDateView;
+    private float weight;
 
     private int currentPick;
     private final int pickStartDate = 0;
@@ -35,6 +37,7 @@ public class DefineContextTimeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_context_time);
 
+        weight = 0;
         startDateView = (TextView)findViewById(R.id.start_time);
         endDateView = (TextView)findViewById(R.id.end_time);
 
@@ -91,7 +94,8 @@ public class DefineContextTimeActivity extends ActionBarActivity {
                     this.getString(R.string.context_time),
                     startDateView.getText().toString(),
                     endDateView.getText().toString(),
-                    false);
+                    false,
+                    weight);
             Bundle bundle = new Bundle();
             // 使用serializable在activity之间传递object对象
             bundle.putSerializable(MyContext.key, contextTime);
@@ -114,6 +118,8 @@ public class DefineContextTimeActivity extends ActionBarActivity {
     }
 
     public void onButtonDoneClick(View v) {
+        EditText text = (EditText)findViewById(R.id.editText_time);
+        weight = Float.valueOf(text.getText().toString());
         this.finish();
     }
 }

@@ -14,14 +14,21 @@ import me.liaosong.app.securitycontext.R;
 public abstract class MyContext implements Serializable {
     public final static String key = "key";
 
-    private String contextName;
-    private int id;
+    private String contextName; // 情景名
+    private int id;             // 唯一标识符，一般为R.string.context_xxx
+    private float weight;      // 权重
 
     public abstract String getValue();
 
     public MyContext(int id, String contextName) {
         this.id = id;
         this.contextName = contextName;
+    }
+
+    public MyContext(int id, String contextName, float weight) {
+        this.id = id;
+        this.contextName = contextName;
+        this.weight = weight;
     }
 
     /**
@@ -44,5 +51,13 @@ public abstract class MyContext implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public float getWeight() {
+        return weight;
     }
 }

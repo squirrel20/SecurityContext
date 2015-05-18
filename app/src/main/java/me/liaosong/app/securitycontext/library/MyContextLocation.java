@@ -21,6 +21,14 @@ public class MyContextLocation extends MyContext {
         time = location.getTime();
     }
 
+    public MyContextLocation(int id, String contextName, BDLocation location, float weight) {
+        super(id, contextName, weight);
+        addr = location.getAddrStr();
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+        radius = location.getRadius();
+        time = location.getTime();
+    }
     public String getValue() {
         return addr;
     }

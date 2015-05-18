@@ -26,6 +26,15 @@
         android:id="@+id/location"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+    <EditText
+        android:layout_below="@id/location"
+        android:id="@+id/editText_location"
+        android:hint="@string/weight"
+        android:paddingTop="@dimen/text_padding"
+        android:textSize="@dimen/text_size"
+        android:inputType="numberDecimal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:text="@string/done"

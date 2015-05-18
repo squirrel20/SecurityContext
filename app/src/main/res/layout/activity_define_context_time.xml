@@ -8,8 +8,8 @@
 
     <RelativeLayout
         android:id="@+id/timeLayout1"
-        android:padding="@dimen/activity_vertical_margin"
         android:onClick="onSetStartTimeClick"
+        android:paddingBottom="@dimen/text_padding"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -26,7 +26,8 @@
 
     <RelativeLayout
         android:onClick="onSetEndTimeClick"
-        android:padding="@dimen/activity_vertical_margin"
+        android:id="@+id/timeLayout2"
+        android:paddingBottom="@dimen/text_padding"
         android:layout_below="@id/timeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -41,6 +42,17 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
+
+    <EditText
+        android:layout_below="@id/timeLayout2"
+        android:id="@+id/editText_time"
+        android:hint="@string/weight"
+        android:paddingTop="@dimen/text_padding"
+        android:textSize="@dimen/text_size"
+        android:inputType="numberDecimal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
 
     <Button
         android:layout_alignParentBottom="true"
