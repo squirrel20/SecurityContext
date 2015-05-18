@@ -9,6 +9,9 @@ import me.liaosong.app.securitycontext.R;
 
 public class DefineSecuritySetActivity extends ActionBarActivity {
 
+    // TODO SET
+    // 0 默认 1 打开 2 关闭
+    // {SetName, SetValue(0,1,2)} 只需要返回设置了打开和关闭的设置项
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

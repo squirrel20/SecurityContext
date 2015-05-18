@@ -23,7 +23,6 @@ import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.AppInfo;
 import me.liaosong.app.securitycontext.library.MyApplication;
 
-// TODO 定义安全规则
 public class DefineSecurityActivity extends ActionBarActivity {
     private ListView selectedApp;
     private ListView selectedSet;
