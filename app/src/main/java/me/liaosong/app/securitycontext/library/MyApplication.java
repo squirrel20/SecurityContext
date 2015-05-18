@@ -1,12 +1,17 @@
 package me.liaosong.app.securitycontext.library;
 
 import android.app.Application;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by squirrel on 2015/5/11.
@@ -19,6 +24,8 @@ public class MyApplication extends Application {
 
 	public static Application application;
 
+	public ArrayList<AppInfo> appInfos = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,6 +34,25 @@ public class MyApplication extends Application {
         locationClient.registerLocationListener(new MyLocationListener());
 
 		application = this;
+    }
+
+    public void getAllApps() {
+		if (appInfos != null) return;
+		appInfos = new ArrayList<>();
+
+        PackageManager packageManager = this.getPackageManager();
+        List<PackageInfo> packageInfos =packageManager.getInstalledPackages(0);
+
+        for (int i = 0; i < packageInfos.size(); i++) {
+            PackageInfo packageInfo = packageInfos.get(i);
+            AppInfo appInfo = new AppInfo();
+            appInfo.appName = packageInfo.applicationInfo.loadLabel(packageManager).toString();
+            appInfo.appIcon = packageInfo.applicationInfo.loadIcon(packageManager);
+            appInfo.packageName = packageInfo.packageName;
+            appInfos.add(appInfo);
+
+            Log.d(this.getPackageName(), appInfo.appName);
+        }
     }
 
     /**

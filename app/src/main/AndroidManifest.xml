@@ -62,11 +62,11 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".ui.DefineSecurityActivity"
@@ -75,9 +75,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SecurityItemActivity"
+            android:name=".ui.DefineSecurityAppActivity"
             android:label="@string/title_activity_security_item"
             android:parentActivityName=".ui.DefineSecurityActivity" >
             <meta-data
@@ -156,6 +161,10 @@
         <activity
             android:name=".ui.DefineContextSpinnerActivity"
             android:label="@string/title_activity_define_context_spinner" >
+        </activity>
+        <activity
+            android:name=".ui.DefineSecuritySetActivity"
+            android:label="@string/title_activity_define_security_set" >
         </activity>
     </application>
 

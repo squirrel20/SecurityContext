@@ -1,9 +1,7 @@
 package me.liaosong.app.securitycontext.ui;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,58 +12,75 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.AppInfo;
-import me.liaosong.app.securitycontext.library.AppManager;
+import me.liaosong.app.securitycontext.library.MyApplication;
 
 
-public class SecurityItemActivity extends ActionBarActivity {
-    ArrayList<AppInfo> appInfos = null;
+public class DefineSecurityAppActivity extends ActionBarActivity {
+    private ArrayList<AppInfo> appInfos = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_security_item);
+        setContentView(R.layout.activity_define_security_app);
 
-        AppManager appManager = new AppManager(this);
-        appInfos = appManager.appInfos;
+        if (((MyApplication)getApplication()).appInfos == null)
+            ((MyApplication)getApplication()).getAllApps();
+        appInfos = ((MyApplication)getApplication()).appInfos;
 
         ListView listView = (ListView)this.findViewById(R.id.list_apps);
         AppArrayAdapter appArrayAdapter = new AppArrayAdapter(this, appInfos);
         listView.setAdapter(appArrayAdapter);
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_security_item, menu);
+        getMenuInflater().inflate(R.menu.menu_define_security_app, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_done) {
+            this.finish();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void finish() {
+        ArrayList<String> selectedApps  = new ArrayList<>();
+        for (int i = 0; i < appInfos.size(); i++) {
+            if (appInfos.get(i).isChecked)
+                selectedApps.add(appInfos.get(i).packageName);
+        }
+
+        if (selectedApps.size() > 0) {
+            Intent intent = new Intent();
+            intent.putExtra("apps", selectedApps);
+            setResult(RESULT_OK, intent);
+        } else
+            setResult(RESULT_CANCELED);
+
+        super.finish();
+    }
+
     static public class ViewHolder {
         public TextView textView;
         public ImageView imageView;
+        public Switch appSwitch;
     }
 
     private class AppArrayAdapter extends ArrayAdapter<AppInfo> {
@@ -79,7 +94,7 @@ public class SecurityItemActivity extends ActionBarActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             View rowView = convertView;
             if (rowView == null) {
                 LayoutInflater inflater = context.getLayoutInflater();
@@ -87,12 +102,20 @@ public class SecurityItemActivity extends ActionBarActivity {
                 ViewHolder viewHolder = new ViewHolder();
                 viewHolder.textView = (TextView)rowView.findViewById(R.id.list_app_name);
                 viewHolder.imageView = (ImageView)rowView.findViewById(R.id.list_app_icon);
+                viewHolder.appSwitch = (Switch)rowView.findViewById(R.id.switch_app);
                 rowView.setTag(viewHolder);
             }
 
-            ViewHolder holder = (ViewHolder)rowView.getTag();
+            final ViewHolder holder = (ViewHolder)rowView.getTag();
             holder.textView.setText(arrayList.get(position).appName);
             holder.imageView.setImageDrawable(arrayList.get(position).appIcon);
+            holder.appSwitch.setChecked(arrayList.get(position).isChecked);
+            holder.appSwitch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    arrayList.get(position).isChecked = ((Switch)v).isChecked();
+                }
+            });
 
             return rowView;
         }

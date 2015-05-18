@@ -65,4 +65,8 @@
     <string name="title_activity_define_context_light">设置光照强度</string>
     <string name="title_activity_define_context_distance">设置手机与用户的距离</string>
     <string name="weight">权重</string>
+    <string name="file">文件</string>
+    <string name="settings">设置</string>
+    <string name="title_activity_define_context_spinner">添加情景项</string>
+    <string name="app">应用</string>
 </resources>
