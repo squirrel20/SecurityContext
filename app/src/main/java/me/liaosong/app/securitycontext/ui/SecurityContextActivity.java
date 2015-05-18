@@ -9,11 +9,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.MyContext;
 
 public class SecurityContextActivity extends ActionBarActivity {
     private Context context;
+    private final static int CONTEXT_CODE = 1;
+    private final static int SECURITY_CODE = 2;
+    private ArrayList<MyContext> myContextList;
+    /**
+     * 情景集名
+     */
+    private String myContextsName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +32,7 @@ public class SecurityContextActivity extends ActionBarActivity {
         setContentView(R.layout.activity_security_context);
 
         context = this;
+        myContextList = new ArrayList<>();
 
         View footer = this.getLayoutInflater().inflate(R.layout.list_footer, null);
         ListView listView = (ListView)this.findViewById(R.id.security_context);
@@ -29,7 +41,7 @@ public class SecurityContextActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DefineContextActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, CONTEXT_CODE);
             }
         });
 
@@ -38,6 +50,25 @@ public class SecurityContextActivity extends ActionBarActivity {
         listView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) return;
+
+        if (requestCode == CONTEXT_CODE) {
+            int size = data.getIntExtra(MyContext.key, 0);
+            myContextsName = data.getStringExtra("ContextName");
+            for (int i = 0; i < size; i++) {
+                MyContext myContext = (MyContext)data.getSerializableExtra(String.valueOf(i));
+                myContextList.add(myContext);
+            }
+
+            Intent intent = new Intent(this, DefineSecurityActivity.class);
+            startActivityForResult(intent, SECURITY_CODE);
+            //Toast.makeText(this, myContextList.get(0).getContextName(), Toast.LENGTH_SHORT).show();
+        } else if (requestCode == SECURITY_CODE) {
+
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

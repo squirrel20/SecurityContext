@@ -5,5 +5,6 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/library/MyContextTime.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/ui/DefineContextLocationActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/ui/DefineContextTimeActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/ui/SecurityContextActivity.java" charset="UTF-8" />
   </component>
 </project>

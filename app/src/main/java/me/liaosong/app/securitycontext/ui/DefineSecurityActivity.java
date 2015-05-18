@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import me.liaosong.app.securitycontext.library.arrayadapter.MyArrayAdapter;
 import me.liaosong.app.securitycontext.R;
 
-
+// TODO 定义安全规则
 public class DefineSecurityActivity extends ActionBarActivity {
 
     private ListView listView;

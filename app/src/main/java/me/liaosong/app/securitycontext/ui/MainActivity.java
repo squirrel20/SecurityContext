@@ -17,6 +17,9 @@ import me.liaosong.app.securitycontext.library.Constants;
 import me.liaosong.app.securitycontext.library.PWSQLiteOpenHelper;
 import me.liaosong.app.securitycontext.ui.SetPasswordActivity;
 
+/**
+ * 接入检查，若已设置密码则跳转到输入密码Activity，否则跳转到设置密码Activity
+ */
 public class MainActivity extends ActionBarActivity {
 
     @Override

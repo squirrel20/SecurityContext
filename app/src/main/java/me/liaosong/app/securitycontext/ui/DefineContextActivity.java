@@ -28,6 +28,7 @@ import me.liaosong.app.securitycontext.library.MyContext;
 public class DefineContextActivity extends ActionBarActivity {
     private ArrayList<MyContext> myContextList;
     private MyContextAdapter arrayAdapter;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +36,16 @@ public class DefineContextActivity extends ActionBarActivity {
         setContentView(R.layout.activity_define_context);
 
         myContextList = new ArrayList<>();
+        editText = (EditText)findViewById(R.id.editText_context);
 
         ListView listView = (ListView) this.findViewById(R.id.define_context);
-        View header = this.getLayoutInflater().inflate(R.layout.list_header, null);
         View footer = this.getLayoutInflater().inflate(R.layout.list_footer, null);
-
-        ((EditText) header.findViewById(R.id.header_edit_text))
-                .setHint(R.string.input_context_name);
         footer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.showContextMenu();
             }
         });
-
-
-        listView.addHeaderView(header);
         listView.addFooterView(footer);
 
         arrayAdapter = new MyContextAdapter(this);
@@ -187,7 +182,16 @@ public class DefineContextActivity extends ActionBarActivity {
 
     @Override
     public void finish() {
-        // TODO 应该返回 ArrayList<MyContext>的一个拷贝，或者读取具体的数据？
+        Bundle bundle = new Bundle();
+        for (int i = 0; i < myContextList.size(); i++) {
+            bundle.putSerializable(String.valueOf(i), myContextList.get(i));
+        }
+        Intent data = new Intent();
+        data.putExtra(MyContext.key, myContextList.size());
+        data.putExtra("ContextName", editText.getText().toString());
+        data.putExtras(bundle);
+        setResult(RESULT_OK, data);
+
         super.finish();
     }
 
