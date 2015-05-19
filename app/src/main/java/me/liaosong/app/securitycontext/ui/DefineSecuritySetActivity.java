@@ -1,42 +1,57 @@
 package me.liaosong.app.securitycontext.ui;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.arrayadapter.SetArrayAdapter;
 
 public class DefineSecuritySetActivity extends ActionBarActivity {
+    private ListView listView;
+    private int[] setStatus;
+    private String[] sets;
 
     // TODO SET
-    // 0 Ä¬ÈÏ 1 ´ò¿ª 2 ¹Ø±Õ
-    // {SetName, SetValue(0,1,2)} Ö»ĞèÒª·µ»ØÉèÖÃÁË´ò¿ªºÍ¹Ø±ÕµÄÉèÖÃÏî
+    // 0 é»˜è®¤ 1 æ‰“å¼€ 2 å…³é—­
+    // {SetName, SetValue(0,1,2)} åªéœ€è¦è¿”å›è®¾ç½®äº†æ‰“å¼€å’Œå…³é—­çš„è®¾ç½®é¡¹
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_define_security_set);
+
+        listView = (ListView)findViewById(R.id.security_set);
+        sets = getResources().getStringArray(R.array.sets);
+        setStatus = new int[setStatus.length];
+        for (int i = 0; i < setStatus.length; i++)
+            setStatus[i] = R.string.the_default;
+
+        //MyArrayAdapter adapter = new MyArrayAdapter(this, sets, setStatus);
+        SetArrayAdapter setArrayAdapter = new SetArrayAdapter(this, sets, setStatus);
+        listView.setAdapter(setArrayAdapter);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_security_set, menu);
-        return true;
+    public void finish() {
+        Intent data = new Intent();
+        data.putExtra("setStatus", setStatus);
+        setResult(RESULT_OK, data);
+        super.finish();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onButtonDoneClick(View v) {
+        this.finish();
     }
 }

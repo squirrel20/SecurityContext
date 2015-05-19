@@ -95,4 +95,17 @@
     <string name="settings">Settings</string>
     <string name="file">File</string>
     <string name="title_activity_define_security_set">DefineSecuritySetActivity</string>
+
+    <!-- DefineSecuritySetActivity -->
+    <string-array name="sets">
+        <item>Voice</item>
+        <item>Bluetooth</item>
+        <item>GPRS</item>
+        <item>WiFi</item>
+        <item>Shake</item>
+        <item>GPS</item>
+    </string-array>
+    <string name="the_default">Default</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

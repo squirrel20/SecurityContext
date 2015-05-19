@@ -37,6 +37,8 @@
     <!-- 允许应用读取低级别的系统日志文件 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".library.MyApplication"
         android:allowBackup="true"
@@ -166,6 +168,12 @@
             android:name=".ui.DefineSecuritySetActivity"
             android:label="@string/title_activity_define_security_set" >
         </activity>
+
+        <!-- file select -->
+        <activity android:name="paul.arian.fileselector.FileSelectionActivity" />
+        <activity android:name="paul.arian.fileselector.FolderSelectionActivity" />
+
+
     </application>
 
 </manifest>

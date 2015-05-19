@@ -69,4 +69,16 @@
     <string name="settings">设置</string>
     <string name="title_activity_define_context_spinner">添加情景项</string>
     <string name="app">应用</string>
+    <string name="title_activity_define_security_set">选项设置</string>
+    <string-array name="sets">
+        <item>声音</item>
+        <item>蓝牙</item>
+        <item>GPRS</item>
+        <item>WiFi</item>
+        <item>震动</item>
+        <item>GPS</item>
+    </string-array>
+    <string name="the_default">默认</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
 </resources>

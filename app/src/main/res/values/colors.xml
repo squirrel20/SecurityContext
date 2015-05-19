@@ -2,4 +2,5 @@
 <resources>
     <color name="test">#333333</color>
     <color name="gray">#ffd9d9d9</color>
+    <color name="header">#ddd</color>
 </resources>

@@ -24,5 +24,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     // https://github.com/jjobes/SlideDateTimePicker
     compile project(':slideDateTimePicker')
+    compile project(':androidMultiplefileSelectorDialog')
     compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/cwac-merge-1.0.4.jar')
+    compile files('libs/picasso-2.4.0.jar')
 }

@@ -3,7 +3,6 @@ package me.liaosong.app.securitycontext.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,11 +16,15 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.AppInfo;
 import me.liaosong.app.securitycontext.library.MyApplication;
+import me.liaosong.app.securitycontext.library.arrayadapter.SetArrayAdapter;
+
+import paul.arian.fileselector.FileSelectionActivity;
 
 public class DefineSecurityActivity extends ActionBarActivity {
     private ListView selectedApp;
@@ -30,10 +33,17 @@ public class DefineSecurityActivity extends ActionBarActivity {
 
     private final static int APP_CODE = 1;
     private final static int SET_CODE = 2;
+    private final static int FILE_CODE = 3;
 
     private ArrayList<AppInfo> appInfos;
     private ArrayList<String> appsPackageName;
     AppArrayAdapter appArrayAdapter;
+
+    private int[] setStatus;
+    private String[] sets;
+
+    private ArrayList<String> files;
+    ArrayAdapter<String> fileArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +62,21 @@ public class DefineSecurityActivity extends ActionBarActivity {
         ((TextView)v2.findViewById(R.id.textViewSimple)).setText(R.string.settings);
         ((TextView)v3.findViewById(R.id.textViewSimple)).setText(R.string.file);
 
+        v1.setBackgroundResource(R.color.header);
+        v2.setBackgroundResource(R.color.header);
+        v3.setBackgroundResource(R.color.header);
+
         v1.setOnClickListener(
                 new SecurityClickListener(this, DefineSecurityAppActivity.class, APP_CODE));
-        v2.setOnClickListener(
-                new SecurityClickListener(this, DefineSecuritySetActivity.class, SET_CODE));
+//        v2.setOnClickListener(
+//                new SecurityClickListener(this, DefineSecuritySetActivity.class, SET_CODE));
+        v3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), FileSelectionActivity.class);
+                startActivityForResult(intent, FILE_CODE);
+            }
+        });
 
         selectedApp.addHeaderView(v1);
         selectedSet.addHeaderView(v2);
@@ -65,11 +86,18 @@ public class DefineSecurityActivity extends ActionBarActivity {
         appArrayAdapter = new AppArrayAdapter(this, appInfos);
         selectedApp.setAdapter(appArrayAdapter);
 
+        sets = getResources().getStringArray(R.array.sets);
+        setStatus = new int[sets.length];
+        for (int i = 0; i < setStatus.length; i++)
+            setStatus[i] = R.string.the_default;
+        //MyArrayAdapter adapter = new MyArrayAdapter(this, sets, setStatus);
+        SetArrayAdapter setArrayAdapter = new SetArrayAdapter(this, sets, setStatus);
+        selectedSet.setAdapter(setArrayAdapter);
+
         // fot test
-        ArrayList<String> arrayList1 = new ArrayList<>();
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList1);
-        selectedSet.setAdapter(adapter1);
-        selectedFile.setAdapter(adapter1);
+        files = new ArrayList<>();
+        fileArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, files);
+        selectedFile.setAdapter(fileArrayAdapter);
     }
 
     @Override
@@ -115,6 +143,17 @@ public class DefineSecurityActivity extends ActionBarActivity {
                 }
             appArrayAdapter.notifyDataSetChanged();
         }
+        else if (requestCode == FILE_CODE) {
+            ArrayList<File> Files = (ArrayList<File>) data.getSerializableExtra(FileSelectionActivity.FILES_TO_UPLOAD); //file array list
+            files.clear();
+            for(File file : Files){
+                //String fileName = file.getName();
+                String uri = file.getAbsolutePath();
+                files.add(uri.toString());
+            }
+            fileArrayAdapter.notifyDataSetChanged();
+        }
+
     }
 
     public class SecurityClickListener implements View.OnClickListener {

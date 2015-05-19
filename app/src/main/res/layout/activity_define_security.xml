@@ -6,19 +6,23 @@
     android:padding="@dimen/text_padding"
     tools:context="me.liaosong.app.securitycontext.ui.DefineSecurityActivity">
 
-    <ListView
-        android:id="@+id/selected_app"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
 
-    <ListView
-        android:id="@+id/selected_set"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
 
-    <ListView
-        android:id="@+id/selected_file"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+            <ListView
+                android:paddingBottom="@dimen/text_padding"
+                android:id="@+id/selected_app"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:paddingBottom="@dimen/text_padding"
+                android:id="@+id/selected_set"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:id="@+id/selected_file"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
 </LinearLayout>
