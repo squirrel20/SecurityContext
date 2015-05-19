@@ -17,12 +17,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.SetInfo;
 import me.liaosong.app.securitycontext.library.arrayadapter.SetArrayAdapter;
 
 public class DefineSecuritySetActivity extends ActionBarActivity {
     private ListView listView;
     private int[] setStatus;
     private String[] sets;
+    private ArrayList<SetInfo> setInfos;
 
     // TODO SET
     // 0 默认 1 打开 2 关闭
@@ -34,19 +36,22 @@ public class DefineSecuritySetActivity extends ActionBarActivity {
 
         listView = (ListView)findViewById(R.id.security_set);
         sets = getResources().getStringArray(R.array.sets);
-        setStatus = new int[setStatus.length];
-        for (int i = 0; i < setStatus.length; i++)
-            setStatus[i] = R.string.the_default;
+        setInfos = new ArrayList<>();
+        for (String set : sets) {
+            setInfos.add(new SetInfo(R.string.the_default, set));
+        }
 
         //MyArrayAdapter adapter = new MyArrayAdapter(this, sets, setStatus);
-        SetArrayAdapter setArrayAdapter = new SetArrayAdapter(this, sets, setStatus);
+        SetArrayAdapter setArrayAdapter = new SetArrayAdapter(this, setInfos);
         listView.setAdapter(setArrayAdapter);
     }
 
     @Override
     public void finish() {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("setInfos", setInfos);
         Intent data = new Intent();
-        data.putExtra("setStatus", setStatus);
+        data.putExtras(bundle);
         setResult(RESULT_OK, data);
         super.finish();
     }

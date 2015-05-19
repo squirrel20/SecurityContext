@@ -40,25 +40,6 @@ public class DefineSecurityAppActivity extends ActionBarActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_security_app, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_done) {
-            this.finish();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void finish() {
         ArrayList<String> selectedApps  = new ArrayList<>();
@@ -75,6 +56,10 @@ public class DefineSecurityAppActivity extends ActionBarActivity {
             setResult(RESULT_CANCELED);
 
         super.finish();
+    }
+
+    public void onButtonDoneClick(View v) {
+        finish();
     }
 
     static public class ViewHolder {

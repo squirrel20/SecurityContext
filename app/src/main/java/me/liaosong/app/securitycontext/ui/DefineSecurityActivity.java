@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.AppInfo;
 import me.liaosong.app.securitycontext.library.MyApplication;
+import me.liaosong.app.securitycontext.library.SetInfo;
 import me.liaosong.app.securitycontext.library.arrayadapter.SetArrayAdapter;
 
 import paul.arian.fileselector.FileSelectionActivity;
@@ -39,8 +40,8 @@ public class DefineSecurityActivity extends ActionBarActivity {
     private ArrayList<String> appsPackageName;
     AppArrayAdapter appArrayAdapter;
 
-    private int[] setStatus;
-    private String[] sets;
+    private ArrayList<SetInfo> setInfos;
+    private SetArrayAdapter setArrayAdapter;
 
     private ArrayList<String> files;
     ArrayAdapter<String> fileArrayAdapter;
@@ -68,8 +69,8 @@ public class DefineSecurityActivity extends ActionBarActivity {
 
         v1.setOnClickListener(
                 new SecurityClickListener(this, DefineSecurityAppActivity.class, APP_CODE));
-//        v2.setOnClickListener(
-//                new SecurityClickListener(this, DefineSecuritySetActivity.class, SET_CODE));
+        v2.setOnClickListener(
+                new SecurityClickListener(this, DefineSecuritySetActivity.class, SET_CODE));
         v3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,40 +87,14 @@ public class DefineSecurityActivity extends ActionBarActivity {
         appArrayAdapter = new AppArrayAdapter(this, appInfos);
         selectedApp.setAdapter(appArrayAdapter);
 
-        sets = getResources().getStringArray(R.array.sets);
-        setStatus = new int[sets.length];
-        for (int i = 0; i < setStatus.length; i++)
-            setStatus[i] = R.string.the_default;
-        //MyArrayAdapter adapter = new MyArrayAdapter(this, sets, setStatus);
-        SetArrayAdapter setArrayAdapter = new SetArrayAdapter(this, sets, setStatus);
+        setInfos = new ArrayList<>();
+        setArrayAdapter = new SetArrayAdapter(this, setInfos);
         selectedSet.setAdapter(setArrayAdapter);
 
         // fot test
         files = new ArrayList<>();
         fileArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, files);
         selectedFile.setAdapter(fileArrayAdapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_define_security, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -148,12 +123,35 @@ public class DefineSecurityActivity extends ActionBarActivity {
             files.clear();
             for(File file : Files){
                 //String fileName = file.getName();
-                String uri = file.getAbsolutePath();
-                files.add(uri.toString());
+                files.add(file.getAbsolutePath());
             }
             fileArrayAdapter.notifyDataSetChanged();
         }
+        else if (requestCode == SET_CODE) {
+            ArrayList<SetInfo> tmp = (ArrayList<SetInfo>)data.getSerializableExtra("setInfos");
+            setInfos.clear();
+            for (int i = 0; i < tmp.size(); i++)
+                if (tmp.get(i).statusID != R.string.the_default)
+                    setInfos.add(tmp.get(i));
+            setArrayAdapter.notifyDataSetChanged();
+        }
 
+    }
+
+    @Override
+    public void finish() {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("set", setInfos);                // 返回设置信息
+        Intent data = new Intent();
+        data.putExtras(bundle);
+        data.putStringArrayListExtra("app", appsPackageName);   // 返回包名
+        data.putStringArrayListExtra("file", files);            // 返回文件绝对路径
+        setResult(RESULT_OK, data);
+        super.finish();
+    }
+
+    public void onButtonDoneClick(View v) {
+        finish();
     }
 
     public class SecurityClickListener implements View.OnClickListener {

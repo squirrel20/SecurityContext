@@ -7,22 +7,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.SetInfo;
 
 /**
  * Created by squirrel on 2015/5/19.
+ * …Ë÷√µƒ  ≈‰∆˜
  */
-public class SetArrayAdapter extends ArrayAdapter<String> {
+public class SetArrayAdapter extends ArrayAdapter<SetInfo> {
     private final Activity context;
-    private final String[] values;
-    private int[] setStatus;
-    private boolean notDefault = false;
+    private ArrayList<SetInfo> setInfos;
 
-    public SetArrayAdapter(Activity context, String[] values, int[] setStatus) {
-        super(context, R.layout.securityitemlayout, values);
+    public SetArrayAdapter(Activity context, ArrayList<SetInfo> setInfos) {
+        super(context, R.layout.securityitemlayout, setInfos);
         this.context = context;
-        this.values = values;
-        this.setStatus = setStatus;
+        this.setInfos = setInfos;
     }
 
     @Override
@@ -41,23 +42,25 @@ public class SetArrayAdapter extends ArrayAdapter<String> {
         }
 
         ViewHolder holder = (ViewHolder) rowView.getTag();
-        String s = values[position];
+        String s = setInfos.get(position).name;
+        int id = setInfos.get(position).statusID;
         holder.text1.setText(s);
-        holder.text2.setText(context.getString(setStatus[position]));
+        holder.text2.setText(context.getString(id));
 
         holder.text2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (setStatus[position] == R.string.the_default)
-                    setStatus[position] = R.string.open;
-                else if(setStatus[position] == R.string.open)
-                    setStatus[position] = R.string.close;
-                else if(setStatus[position] == R.string.close)
-                    setStatus[position] = R.string.the_default;
+                if (setInfos.get(position).statusID == R.string.the_default)
+                    setInfos.get(position).statusID = R.string.open;
+                else if (setInfos.get(position).statusID == R.string.open)
+                    setInfos.get(position).statusID = R.string.close;
+                else if (setInfos.get(position).statusID == R.string.close)
+                    setInfos.get(position).statusID = R.string.the_default;
 
-                ((TextView)v).setText(context.getString(setStatus[position]));
+                ((TextView) v).setText(context.getString(setInfos.get(position).statusID));
             }
         });
+
         return rowView;
     }
 

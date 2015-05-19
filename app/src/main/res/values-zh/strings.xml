@@ -81,4 +81,6 @@
     <string name="the_default">默认</string>
     <string name="open">打开</string>
     <string name="close">关闭</string>
+    <string name="stop">停止中</string>
+    <string name="running">运行中</string>
 </resources>

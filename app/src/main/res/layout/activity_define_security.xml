@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +16,21 @@
 
             <ListView
                 android:paddingBottom="@dimen/text_padding"
+                android:layout_below="@id/selected_app"
                 android:id="@+id/selected_set"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
             <ListView
+                android:layout_below="@id/selected_set"
                 android:id="@+id/selected_file"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
-</LinearLayout>
+    <Button
+        android:text="@string/done"
+        android:layout_alignParentBottom="true"
+        android:onClick="onButtonDoneClick"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

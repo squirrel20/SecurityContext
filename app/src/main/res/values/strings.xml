@@ -108,4 +108,8 @@
     <string name="the_default">Default</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <!-- SecurityContextActivity -->
+    <string name="running">Running</string>
+    <string name="stop">Stop</string>
 </resources>

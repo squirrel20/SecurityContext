@@ -1,20 +1,28 @@
 package me.liaosong.app.securitycontext.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import me.liaosong.app.securitycontext.R;
+import me.liaosong.app.securitycontext.library.AppInfo;
 import me.liaosong.app.securitycontext.library.MyContext;
+import me.liaosong.app.securitycontext.library.SCInfo;
+import me.liaosong.app.securitycontext.library.SetInfo;
 
 public class SecurityContextActivity extends ActionBarActivity {
     private Context context;
@@ -25,6 +33,12 @@ public class SecurityContextActivity extends ActionBarActivity {
      * 情景集名
      */
     private String myContextsName;
+    private ArrayList<String> appsPackageName;
+    private ArrayList<SetInfo> setInfos;
+    private ArrayList<String> files;
+
+    private ArrayAdapter<SCInfo> scInfoArrayAdapter;
+    private ArrayList<SCInfo> scInfoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +59,9 @@ public class SecurityContextActivity extends ActionBarActivity {
             }
         });
 
-        String[] arr = new String[0];
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, arr);
-        listView.setAdapter(adapter);
+        scInfoArrayList = new ArrayList<>();
+        scInfoArrayAdapter = new MyArrayAdapter(this);
+        listView.setAdapter(scInfoArrayAdapter);
     }
 
     @Override
@@ -66,7 +80,12 @@ public class SecurityContextActivity extends ActionBarActivity {
             startActivityForResult(intent, SECURITY_CODE);
             //Toast.makeText(this, myContextList.get(0).getContextName(), Toast.LENGTH_SHORT).show();
         } else if (requestCode == SECURITY_CODE) {
-
+            setInfos = (ArrayList<SetInfo>)data.getSerializableExtra("set");
+            files = data.getStringArrayListExtra("file");
+            appsPackageName = data.getStringArrayListExtra("app");
+            // TODO 怎么把安全情景保存到数据库当中，并且运行该安全情景
+            scInfoArrayList.add(new SCInfo(R.string.running, myContextsName));
+            scInfoArrayAdapter.notifyDataSetChanged();
         }
     }
 
@@ -91,4 +110,54 @@ public class SecurityContextActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public class MyArrayAdapter extends ArrayAdapter<SCInfo> {
+        private Activity activity;
+        public MyArrayAdapter(Activity activity) {
+            super(activity, R.layout.list_item_sc, scInfoArrayList);
+            this.activity = activity;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            View rowView = convertView;
+
+            if (rowView == null) {
+                LayoutInflater inflater = activity.getLayoutInflater();
+                rowView = inflater.inflate(R.layout.list_item_sc, null);
+
+                ViewHolder viewHolder = new ViewHolder();
+                viewHolder.text1 = (TextView) rowView.findViewById(R.id.sc_name);
+                viewHolder.text2 = (TextView) rowView.findViewById(R.id.sc_status);
+
+                rowView.setTag(viewHolder);
+            }
+
+            ViewHolder holder = (ViewHolder) rowView.getTag();
+            SCInfo scInfo = scInfoArrayList.get(position);
+            holder.text1.setText(scInfo.SCName);
+            holder.text2.setText(activity.getString(scInfo.statusID));
+
+            holder.text2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (scInfoArrayList.get(position).statusID == R.string.running)
+                        scInfoArrayList.get(position).statusID = R.string.stop;
+                    else
+                        scInfoArrayList.get(position).statusID = R.string.running;
+                    ((TextView)v).setText(activity.getString(scInfoArrayList.get(position).statusID));
+                    // TODO 如何使安全情景开始和停止
+                }
+            });
+
+            return rowView;
+        }
+
+        class ViewHolder {
+            public TextView text1;
+            public TextView text2;
+        }
+    }
+
+
 }
