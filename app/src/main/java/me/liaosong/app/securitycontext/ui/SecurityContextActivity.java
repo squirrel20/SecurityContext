@@ -3,6 +3,7 @@ package me.liaosong.app.securitycontext.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +17,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.AppInfo;
@@ -69,12 +76,14 @@ public class SecurityContextActivity extends ActionBarActivity {
         if (resultCode != RESULT_OK) return;
 
         if (requestCode == CONTEXT_CODE) {
-            int size = data.getIntExtra(MyContext.key, 0);
+//            int size = data.getIntExtra(MyContext.key, 0);
+//            for (int i = 0; i < size; i++) {
+//                MyContext myContext = (MyContext)data.getSerializableExtra(String.valueOf(i));
+//                myContextList.add(myContext);
+//            }
+
             myContextsName = data.getStringExtra("ContextName");
-            for (int i = 0; i < size; i++) {
-                MyContext myContext = (MyContext)data.getSerializableExtra(String.valueOf(i));
-                myContextList.add(myContext);
-            }
+            myContextList = (ArrayList<MyContext>)data.getSerializableExtra("context");
 
             Intent intent = new Intent(this, DefineSecurityActivity.class);
             startActivityForResult(intent, SECURITY_CODE);
@@ -83,9 +92,43 @@ public class SecurityContextActivity extends ActionBarActivity {
             setInfos = (ArrayList<SetInfo>)data.getSerializableExtra("set");
             files = data.getStringArrayListExtra("file");
             appsPackageName = data.getStringArrayListExtra("app");
-            // TODO 怎么把安全情景保存到数据库当中，并且运行该安全情景
+
             scInfoArrayList.add(new SCInfo(R.string.running, myContextsName));
             scInfoArrayAdapter.notifyDataSetChanged();
+
+            String sdStatus = Environment.getExternalStorageState();
+            if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) {
+                Log.d(getLocalClassName(), "SD card is not available/writeable right now");
+                return;
+            }
+            // TODO 怎么把安全情景保存到数据库当中，并且运行该安全情景
+            // TODO 把安全情景名和状态放在数据库中，把具体安全规则信息放在文件中
+            try {
+                String pathName = "/sdcard/sc/";
+                String fileName = myContextsName;
+                File path = new File(pathName);
+                File file = new File(pathName + fileName);
+                if (!path.exists())
+                    path.mkdir();
+                if (!file.exists())
+                    file.createNewFile();
+                else {
+                    file.delete();
+                    file.createNewFile();
+                }
+                FileOutputStream fs = new FileOutputStream(file);
+                ObjectOutputStream outputStream = new ObjectOutputStream(fs);
+                outputStream.writeObject(myContextList);
+                outputStream.writeObject(setInfos);
+                outputStream.writeObject(files);
+                outputStream.writeObject(appsPackageName);
+                outputStream.close();
+                fs.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

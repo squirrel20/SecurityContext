@@ -182,16 +182,16 @@ public class DefineContextActivity extends ActionBarActivity {
 
     @Override
     public void finish() {
-        Bundle bundle = new Bundle();
-        for (int i = 0; i < myContextList.size(); i++) {
-            bundle.putSerializable(String.valueOf(i), myContextList.get(i));
-        }
         Intent data = new Intent();
-        data.putExtra(MyContext.key, myContextList.size());
+//        Bundle bundle = new Bundle();
+//        for (int i = 0; i < myContextList.size(); i++) {
+//            bundle.putSerializable(String.valueOf(i), myContextList.get(i));
+//        }
+//        data.putExtra(MyContext.key, myContextList.size());
+//        data.putExtras(bundle);
         data.putExtra("ContextName", editText.getText().toString());
-        data.putExtras(bundle);
+        data.putExtra("context", myContextList);
         setResult(RESULT_OK, data);
-
         super.finish();
     }
 
