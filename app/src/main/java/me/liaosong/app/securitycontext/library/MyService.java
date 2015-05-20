@@ -145,6 +145,7 @@ public class MyService extends Service {
 //            Log.v(TAG, "className " + className);
             Log.v(TAG, "processName " + processName);
             if (processName.equals("com.miui.gallery")) {
+                // TODO 为什么会跑到SecurityContextActivity去呢
                 Intent intent = new Intent(mContext.getApplicationContext(), AccessActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("service", true);
