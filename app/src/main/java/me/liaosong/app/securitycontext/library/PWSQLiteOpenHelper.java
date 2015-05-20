@@ -68,4 +68,15 @@ public class PWSQLiteOpenHelper extends SQLiteOpenHelper {
     public Cursor getPassword(SQLiteDatabase db) {
         return db.query(TABLE_NAME, new String[]{COLUMN_NAME_PASSWORD}, null, null, null, null, null);
     }
+
+    public static String getPassword(Context context) {
+        PWSQLiteOpenHelper pwsqLiteOpenHelper = new PWSQLiteOpenHelper(context);
+        Cursor cursor = pwsqLiteOpenHelper.getPassword(pwsqLiteOpenHelper.getReadableDatabase());
+        if (cursor == null || cursor.getCount() != 1)
+            return null;
+        else {
+            cursor.moveToFirst();
+            return cursor.getString(cursor.getColumnIndex(PWSQLiteOpenHelper.COLUMN_NAME_PASSWORD));
+        }
+    }
 }

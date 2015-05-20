@@ -27,31 +27,16 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PWSQLiteOpenHelper pwsqLiteOpenHelper = new PWSQLiteOpenHelper(this);
-        Cursor cursor = pwsqLiteOpenHelper.getPassword(pwsqLiteOpenHelper.getReadableDatabase());
-//        if (cursor != null) {
-//            cursor.moveToFirst();
-//            int count = cursor.getCount();
-//            int columnCount = cursor.getColumnCount();
-//            int index = cursor.getColumnIndex(PWSQLiteOpenHelper.COLUMN_NAME_PASSWORD);
-//            String password = cursor.getString(index);
-//            int i = 0;
-//        }
-
+        String pwd = PWSQLiteOpenHelper.getPassword(this);
         Intent intent;
-        if (cursor == null || cursor.getCount() != 1) {
+        if (pwd == null) {
             intent = new Intent(this, SetPasswordActivity.class);
         } else {
             // 难道默认不是在第一个？
             // 为什么没有这行代码不能执行 cursor.getString
-            cursor.moveToFirst();
             intent = new Intent(this, AccessActivity.class);
-            intent.putExtra(
-                    Constants.KEY_PASSWORD, cursor.getString(
-                            cursor.getColumnIndex(PWSQLiteOpenHelper.COLUMN_NAME_PASSWORD)));
+            intent.putExtra(Constants.KEY_PASSWORD, pwd);
         }
-
-        cursor.close();
         startActivity(intent);
         this.finish();
 

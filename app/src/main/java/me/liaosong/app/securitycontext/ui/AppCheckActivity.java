@@ -1,12 +1,10 @@
 package me.liaosong.app.securitycontext.ui;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,23 +12,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import me.liaosong.app.securitycontext.R;
-import me.liaosong.app.securitycontext.library.Constants;
 import me.liaosong.app.securitycontext.library.PWSQLiteOpenHelper;
 
-public class AccessActivity extends ActionBarActivity {
-
+public class AppCheckActivity extends ActionBarActivity {
     private String password;
     private TextView textView;
-    private boolean isFromService;
+    private boolean isFinish = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_access);
+        setContentView(R.layout.activity_app_check);
 
         this.getSupportActionBar().hide();
-        isFromService = getIntent().getBooleanExtra("service", false);
-
         password = PWSQLiteOpenHelper.getPassword(this);
         textView = (TextView) this.findViewById(R.id.check_password_status);
         EditText editText = (EditText) this.findViewById(R.id.check_password);
@@ -49,7 +43,8 @@ public class AccessActivity extends ActionBarActivity {
             public void afterTextChanged(Editable s) {
                 if (s.length() == 4) {
                     if (s.toString().equals(password)) {
-                        gotoSC();
+                        isFinish = true;
+                        finish();
                     } else {
                         textView.setVisibility(View.VISIBLE);
                     }
@@ -58,11 +53,10 @@ public class AccessActivity extends ActionBarActivity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_access, menu);
+        getMenuInflater().inflate(R.menu.menu_app_check, menu);
         return true;
     }
 
@@ -81,13 +75,13 @@ public class AccessActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void gotoSC() {
-        Log.d(getLocalClassName(), String.valueOf(isFromService));
-        if (!isFromService) {
-            Intent intent = new Intent(this, SecurityContextActivity.class);
-//            intent.putExtra("service", isFromService);
-            startActivity(intent);
-        }
-        this.finish();
+    @Override
+    public void onBackPressed() {}
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!isFinish)
+            finish();
     }
 }

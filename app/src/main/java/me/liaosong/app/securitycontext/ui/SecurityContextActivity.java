@@ -1,9 +1,12 @@
 package me.liaosong.app.securitycontext.ui;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Environment;
+import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +31,9 @@ import java.util.Enumeration;
 import me.liaosong.app.securitycontext.R;
 import me.liaosong.app.securitycontext.library.AppInfo;
 import me.liaosong.app.securitycontext.library.MyContext;
+import me.liaosong.app.securitycontext.library.MyService;
 import me.liaosong.app.securitycontext.library.SCInfo;
+import me.liaosong.app.securitycontext.library.Set;
 import me.liaosong.app.securitycontext.library.SetInfo;
 
 public class SecurityContextActivity extends ActionBarActivity {
@@ -47,10 +52,19 @@ public class SecurityContextActivity extends ActionBarActivity {
     private ArrayAdapter<SCInfo> scInfoArrayAdapter;
     private ArrayList<SCInfo> scInfoArrayList;
 
+    private MyService myService;
+    private ServiceConnection serviceConnection;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_security_context);
+
+//        boolean isFromService = getIntent().getBooleanExtra("service", false);
+//        if (isFromService)
+//            finish();
+
+        startMyService();
 
         context = this;
         myContextList = new ArrayList<>();
@@ -124,6 +138,9 @@ public class SecurityContextActivity extends ActionBarActivity {
                 outputStream.writeObject(appsPackageName);
                 outputStream.close();
                 fs.close();
+
+                if (myService != null)
+                    myService.notifyServiceUpdate();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -152,6 +169,25 @@ public class SecurityContextActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startMyService() {
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
+
+        serviceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                myService = ((MyService.MyBinder)service).getService();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                myService = null;
+            }
+        };
+        Intent bindIntent = new Intent(this,MyService.class);
+        bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
     }
 
     public class MyArrayAdapter extends ArrayAdapter<SCInfo> {

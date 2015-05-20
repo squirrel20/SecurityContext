@@ -50,6 +50,8 @@ public class MyApplication extends Application {
             appInfo.appIcon = packageInfo.applicationInfo.loadIcon(packageManager);
             appInfo.packageName = packageInfo.packageName;
             appInfos.add(appInfo);
+
+			//Log.d(getPackageName(), appInfo.appName + " " + appInfo.packageName);
         }
     }
 

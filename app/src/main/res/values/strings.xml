@@ -112,4 +112,5 @@
     <!-- SecurityContextActivity -->
     <string name="running">Running</string>
     <string name="stop">Stop</string>
+    <string name="title_activity_app_check">AppCheckActivity</string>
 </resources>

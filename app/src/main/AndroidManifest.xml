@@ -26,6 +26,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="ANDROID.PERMISSION.CHANGE_NETWORK_STATE" />
     <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
@@ -37,6 +38,7 @@
     <!-- 允许应用读取低级别的系统日志文件 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="ANDROID.PERMISSION.GET_TASKS" />
 
     <application
         android:name=".library.MyApplication"
@@ -177,6 +179,16 @@
             android:name=".library.MyIntentService"
             android:exported="false" >
         </service>
+        <service
+            android:name=".library.MyService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <activity
+            android:name=".ui.AppCheckActivity"
+            android:label="@string/title_activity_app_check" >
+        </activity>
     </application>
 
 </manifest>
