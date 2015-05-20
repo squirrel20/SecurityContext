@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/library/AppInfo.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/library/MyApplication.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/library/MyContextTime.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/library/MyService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/library/SCInfo.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/ui/DefineContextLocationActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/ui/DefineContextTimeActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/me/liaosong/app/securitycontext/ui/DefineSecurityAppActivity.java" charset="UTF-8" />

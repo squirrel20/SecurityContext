@@ -2,7 +2,7 @@ package me.liaosong.app.securitycontext.library;
 
 /**
  * Created by squirrel on 2015-05-19.
- * 安全情景信息
+ * 瀹夊叏鎯呮櫙淇℃伅
  */
 public class SCInfo {
     public int statusID;

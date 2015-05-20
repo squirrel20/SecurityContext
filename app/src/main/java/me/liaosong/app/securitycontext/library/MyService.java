@@ -29,6 +29,7 @@ public class MyService extends Service {
     private ArrayList<ArrayList<String>> allFiles;
 
     private Timer timer;
+    private static String lastProcessName = "";
 
     public MyService() {
         allContext = new ArrayList<>();
@@ -54,8 +55,9 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(MyService.class.getName(), "on start command");
+        readMyContexts();
         startTimer();
-        return Service.START_STICKY;    // 当重新启动service时，将会调用onStartCommand
+        return Service.START_STICKY;    // 褰撻噸鏂板惎鍔╯ervice鏃讹紝灏嗕細璋冪敤onStartCommand
     }
 
     @Override
@@ -92,6 +94,9 @@ public class MyService extends Service {
                 ArrayList<SetInfo> setInfos = (ArrayList<SetInfo>) inputStream.readObject();
                 ArrayList<String> files = (ArrayList<String>) inputStream.readObject();
                 ArrayList<String> appsPackageName = (ArrayList<String>) inputStream.readObject();
+
+//                for (String name : appsPackageName)
+//                    Log.d(MyService.class.getName(), name);
 
                 allContext.add(myContexts);
                 allSets.add(setInfos);
@@ -144,13 +149,26 @@ public class MyService extends Service {
 //            Log.v(TAG, "packageName " + packageName);
 //            Log.v(TAG, "className " + className);
             Log.v(TAG, "processName " + processName);
-            if (processName.equals("com.miui.gallery")) {
-                // TODO 为什么会跑到SecurityContextActivity去呢
-                Intent intent = new Intent(mContext.getApplicationContext(), AccessActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("service", true);
-                mContext.startActivity(intent);
+            for (ArrayList<String> arrayList : allPackageNames) {
+                for (String packageName : arrayList) {
+                    if (processName.equals(packageName) && !processName.equals(lastProcessName)) {
+                        lastProcessName = processName;
+                        Intent intent = new Intent(mContext.getApplicationContext(), AccessActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("service", true);
+                        mContext.startActivity(intent);
+                        return;
+                    }
+                }
             }
+//            if (processName.equals("com.miui.gallery") && !processName.equals(lastProcessName)) {
+//                // TODO 涓轰粈涔堜細璺戝埌SecurityContextActivity鍘诲憿锛屽洜涓篢ASK涓涓�涓槸SecurityContextActivity?
+//                lastProcessName = processName;
+//                Intent intent = new Intent(mContext.getApplicationContext(), AccessActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.putExtra("service", true);
+//                mContext.startActivity(intent);
+//            }
 
         }
     }
